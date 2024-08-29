@@ -1,17 +1,16 @@
 ﻿@model IEnumerable<Microsoft.AspNetCore.Identity.IdentityRole>
 
-<h1 class="bg-info text-white">Todos los Roles</h1>
+<h1 class="bg-info text-white">Todos los Roles Roles</h1>
 <a asp-action="Create" class="btn btn-secondary">Crear un Rol</a>
 
 <table class="table table-sm table-bordered table-bordered">
     <tr><th>ID</th><th>Nombre</th><th>Users</th><th>Update</th><th>Eliminar</th></tr>
-    <!-- Se recorre este ciclo con fines de recorrer los roles -->
     @foreach (var rol in Model)
     {
         <tr>
             <td>@rol.Id</td>
             <td>@rol.Name</td>
-            <td i-role="@rol.Id"></td> <!-- Mostrara una etiqueta personalizada, que modificara este elemento para mostrar todos los usuarios que tengan dicho rol en especifico -->
+            <td i-role="@rol.Id"></td>
             <td><a class="btn btn-sm btn-primary" asp-action="Update" asp-route-id="@rol.Id">Actualizar</a></td>
             <td>
                 <form asp-action="Delete" asp-route-id="@rol.Id" method="post">

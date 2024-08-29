@@ -15,10 +15,9 @@ namespace Identidad.Controllers
             _userManager = usrManager;
         }
 
-
-
         // Solamente mostrara la vista si el usuario esta autenticado
-        [Authorize]
+        //[Authorize(Roles = "Administración")]
+        [Authorize(Roles = "Recursos Humanos")]
         public async Task<IActionResult> Index()
         {
             AppUsuario usuario = await _userManager.GetUserAsync(HttpContext.User);
