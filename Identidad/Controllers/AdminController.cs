@@ -37,7 +37,10 @@ namespace Identidad.Controllers
                 AppUsuario appUsuario = new AppUsuario
                 {
                     UserName = usuario.Nombre,
-                    Email = usuario.Email
+                    Email = usuario.Email,
+                    Pais = usuario.Pais,
+                    Edad = usuario.Edad,
+                    Salario = usuario.Salario
                 };
 
                 IdentityResult resultado = await userManager.CreateAsync(appUsuario, usuario.Password);
@@ -107,7 +110,7 @@ namespace Identidad.Controllers
         //}
 
         [HttpPost]
-        public async Task<IActionResult> Update(string id, string email, string password)
+        public async Task<IActionResult> Update(string id, string email, string password, string pais, int edad, string salario)
         {
             AppUsuario usuario = await userManager.FindByIdAsync(id);
 
@@ -140,6 +143,12 @@ namespace Identidad.Controllers
                         Errors(passValido);
                     }
                 }
+
+                usuario.Edad = edad;
+                Pais miPais;
+                Enum.TryParse(pais, out miPais);
+                usuario.Pais = miPais;
+                usuario.Salario = salario;
 
                 IdentityResult resultado = await userManager.UpdateAsync(usuario);
 
