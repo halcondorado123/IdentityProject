@@ -9,7 +9,8 @@ namespace Identidad.Controllers
 {
     public class ClaimsController : Controller
     {
-        [Authorize]
+        //[Authorize]
+        //[Authorize(Policy = "Segundo Email")]
         public ViewResult Index()
         {
             return View(User?.Claims);
@@ -17,9 +18,13 @@ namespace Identidad.Controllers
 
         private readonly UserManager<AppUsuario> userManager;
 
-        public ClaimsController(UserManager<AppUsuario> userManager)
+        // Para la implementacion de acceso privado
+        private IAuthorizationService authService;
+
+        public ClaimsController(UserManager<AppUsuario> userManager, IAuthorizationService authService)
         {
             this.userManager = userManager;
+            this.authService = authService;             // <-- Para la implementacion de acceso privado
         }
 
 
@@ -99,5 +104,33 @@ namespace Identidad.Controllers
             return View();
         }
 
+        //[Authorize(Policy = "Segundo Email")]
+        public ViewResult Proyecto()
+        {
+            return View("Index", User?.Claims);
+        }
+
+        [Authorize(Policy = "PermitirUsuarios")]
+        public ViewResult SubirArchivos()
+        {
+            return View("Index", User?.Claims);
+        }
+
+
+        public async Task<IActionResult> AccesoPrivado(string titulo)
+        {
+            string[] UsuariosPermitidos = { "espana", "turbias" };
+            AuthorizationResult resultado = await authService.AuthorizeAsync(User, UsuariosPermitidos, "AccesoPrivado");
+
+            if (resultado.Succeeded)
+            {
+                return View("Index", User?.Claims);     // Trae todos los Claims al(los) usuarios autorizados
+            }
+
+            else
+            {
+                return Content("Ha sucedido un error en el acceso a este recurso");
+            }
+        }
     }
 }
