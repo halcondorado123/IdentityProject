@@ -1,19 +1,129 @@
 ﻿@model Login
 
+<style>
+    .floating-form {
+        position: fixed; /* Fija el formulario en la pantalla */
+        top: 50%; /* Coloca el formulario en el centro verticalmente */
+        left: 50%; /* Coloca el formulario en el centro horizontalmente */
+        transform: translate(-50%, 100%); /* Ajusta la posición para ocultar el formulario abajo de la vista */
+        width: 500px; /* Ancho del formulario flotante */
+        display: none; /* Inicialmente oculto */
+        z-index: 1050; /* Asegura que esté encima de otros elementos */
+        transition: transform 0.5s ease; /* Transición suave */
+    }
+
+    .show {
+        display: block; /* Muestra el formulario */
+        transform: translate(-50%, -50%); /* Mueve el formulario al centro */
+    }
+
+    .hide {
+        transform: translate(-50%, 100%); /* Mueve el formulario hacia abajo cuando se oculta */
+    }
+
+    .card-header {
+        position: relative;
+    }
+
+    .close-btn {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        cursor: pointer;
+        font-size: 24px; /* Tamaño del ícono de cerrar */
+    }
+
+    .button-group {
+        display: flex; /* Utiliza Flexbox para alinear los botones en una fila */
+        justify-content: center; /* Centra los botones horizontalmente */
+        margin-top: 20px; /* Espacio superior para separar los botones del contenido del formulario */
+    }
+
+        .button-group .btn {
+            margin: 0 5px; /* Espacio horizontal entre los botones */
+        }
+
+</style>
+
+
+
 <h1 class="bg-info text-white">Login</h1>
-<div class="text-danger" asp-validation-summary="All"></div>
+
+<div class="container mt-5">
+    <button id="toggleFormButton" class="btn btn-primary">Mostrar Formulario</button>
+</div>
+<div id="floatingForm" class="floating-form hide card text-center">
+    <div class="card-header">
+        Iniciar sesión
+        <span id="closeFormButton" class="close-btn">&times;</span>
+    </div>
+    <img src="/img/free-user-icon-295-thumb.png" alt="Ícono de usuario gratuito" class="d-block mx-auto my-4" style="border-radius:50%; border: 2px solid #c2cde8;" width="150" height="150" />
+    <form asp-action="Login" method="post">
+        <input type="hidden" asp-for="ReturnUrl" />
+        <div class="form-group">
+            <label asp-for="Email"></label>
+            <input asp-for="Email" class="form-control w-75 mx-auto" placeholder="Ingresa tu email" />
+        </div>
+        <div class="form-group">
+            <label asp-for="Password"></label>
+            <input asp-for="Password" class="form-control w-75 mx-auto" placeholder="Ingresa tu contraseña" />
+        </div>
+        <div>
+            <div class="text-danger" asp-validation-summary="All" style="margin: 15px auto; list-style:none;"></div>
+        </div>
+        <div class="button-group">
+            <button class="btn btn-primary" type="submit">Log In</button>
+            <button type="button" id="closeFormButton" class="btn btn-secondary">Cerrar</button>
+        </div>
+    </form>
+</div>
+<!-- Contenedor del formulario flotante -->
 
 
-<form asp-action="Login" method="post">
-    <input type="hidden" asp-for="ReturnUrl"/>
-    <div class="form-group">
-        <label asp-for="Email"></label>
-        <input asp-for="Email" class="form-control" />
-    </div>
-    <div class="form-group">
-        <label asp-for="Password"></label>
-        <input asp-for="Password" class="form-control" />
-    </div>
-    <button class="btn btn-primary" type="submit">Log In</button>
-    
-</form>
+<script>
+    document.getElementById('toggleFormButton').addEventListener('click', function () {
+        var form = document.getElementById('floatingForm');
+        form.classList.remove('hide');
+        form.classList.add('show');
+    });
+
+    document.addEventListener('DOMContentLoaded', function () {
+        // Mostrar el formulario flotante
+        document.getElementById('toggleFormButton').addEventListener('click', function () {
+            document.getElementById('floatingForm').classList.add('show');
+        });
+
+        // Cerrar el formulario flotante al hacer clic en la X o el botón Cerrar
+        document.querySelectorAll('#closeFormButton').forEach(function (button) {
+            button.addEventListener('click', function () {
+                document.getElementById('floatingForm').classList.remove('show');
+            });
+        });
+    });
+
+    // Cerrar el formulario flotante al hacer clic en la X o el botón Cerrar
+    document.querySelectorAll('#closeFormButton').forEach(function (button) {
+        button.addEventListener('click', function () {
+            document.getElementById('floatingForm').classList.remove('show');
+        });
+    });
+
+    // Mostrar SweetAlert2 en caso de errores de validación
+    const form = document.getElementById('loginForm');
+    form.addEventListener('submit', function (event) {
+        const validationSummary = document.getElementById('validationSummary').innerHTML;
+
+        if (validationSummary.trim() !== '') {
+            // Previene el envío del formulario si hay errores
+            event.preventDefault();
+
+            // Mostrar errores en SweetAlert2
+            Swal.fire({
+                icon: 'error',
+                title: 'Errores de Validación',
+                html: `<ul>${validationSummary}</ul>`,
+                confirmButtonText: 'Cerrar'
+            });
+        }
+    });
+</script>

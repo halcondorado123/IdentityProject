@@ -10,7 +10,5 @@ namespace Identidad.Models
         public string Password { get; set; }
         public string ReturnUrl { get; set; }
 
-
-
     }
 }
