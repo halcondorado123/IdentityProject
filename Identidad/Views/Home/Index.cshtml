@@ -1,10 +1,8 @@
-﻿@model string
+﻿@model InfoAccesoApp
 
-<h1 class="bg-info" text-white>Index</h1>
+<div class="content-container">
+    <h2>@Model.NombreUsuario</h2>
+    <p>@Model.FechaHora</p>
+    <p>Palomillas</p>
+</div>
 
-@Model
-
-@if (User?.Identity?.IsAuthenticated ?? false)
-{
-    <a asp-controller="Account" asp-action="Logout" class="btn btn-danger">Log Out</a>
-}

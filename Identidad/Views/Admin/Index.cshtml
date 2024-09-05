@@ -1,7 +1,8 @@
 @model IEnumerable<AppUsuario>
 
 <h1 class="bg-info text-white">Todos los Usuarios</h1>
-<a asp-action="Create" class="btn btn-secondary">Crear un Usuario</a>
+@* <a asp-action="Create" class="btn btn-secondary">Crear un Usuario</a> *@
+<a asp-controller="Admin" asp-action="Create" class="nav-link text-white">Crear Usuario</a>
 
 <table class="table table-sm table-bordered">
     <tr><th>ID</th><th>Nombre</th><th>Email</th></tr>
@@ -23,3 +24,5 @@
         </tr>
     }
 </table>
+
+
