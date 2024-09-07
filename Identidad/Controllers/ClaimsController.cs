@@ -1,7 +1,11 @@
-﻿using Identidad.Models;
+﻿using Identidad.Helpers;
+using Identidad.Models;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Reflection.Metadata.Ecma335;
 using System.Security.Claims;
 
@@ -9,24 +13,24 @@ namespace Identidad.Controllers
 {
     public class ClaimsController : Controller
     {
+        private readonly UserManager<AppUsuario> _userManager;
+        private readonly IAuthorizationService _authService;
+        private readonly AuditLogger _auditLogger; // Inyecta AuditLogger
+
+        // Constructor único que acepta todas las dependencias necesarias
+        public ClaimsController(IdentidadDbContext context, UserManager<AppUsuario> userManager, IAuthorizationService authService, AuditLogger auditLogger)
+        {
+            _userManager = userManager;
+            _authService = authService;
+            _auditLogger = auditLogger;
+        }
+
         //[Authorize]
         //[Authorize(Policy = "Segundo Email")]
         public ViewResult Index()
         {
             return View(User?.Claims);
         }
-
-        private readonly UserManager<AppUsuario> userManager;
-
-        // Para la implementacion de acceso privado
-        private IAuthorizationService authService;
-
-        public ClaimsController(UserManager<AppUsuario> userManager, IAuthorizationService authService)
-        {
-            this.userManager = userManager;
-            this.authService = authService;             // <-- Para la implementacion de acceso privado
-        }
-
 
         public ViewResult Create()
         {
@@ -38,27 +42,28 @@ namespace Identidad.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(string claimtype, string claimValue)
         {
-            AppUsuario usuario = await userManager.GetUserAsync(HttpContext.User);
+            AppUsuario usuario = await _userManager.GetUserAsync(HttpContext.User);
             Claim reclamo = new Claim(claimtype, claimValue, ClaimValueTypes.String);
 
             // Crear nuevo reclamo para nuestro usuario
-            IdentityResult resultado = await userManager.AddClaimAsync(usuario, reclamo);
+            IdentityResult resultado = await _userManager.AddClaimAsync(usuario, reclamo);
             if (resultado.Succeeded)
+            {
+                await _auditLogger.LogClaimChangeAsync(usuario.Id, claimtype, claimValue, "Add");
                 return RedirectToAction("Index");
+            }
             else
                 ModelState.AddModelError("", "No se ha podido crear el reclamo");
 
             return View();
         }
 
-
-        // Eliminar un reclamo
         [HttpPost]
         public async Task<IActionResult> Delete(string claimValues)
         {
             try
             {
-                AppUsuario usuario = await userManager.GetUserAsync(HttpContext.User);
+                var usuario = await _userManager.GetUserAsync(HttpContext.User);
 
                 if (usuario == null)
                 {
@@ -66,18 +71,19 @@ namespace Identidad.Controllers
                     return View();
                 }
 
-                string[] claimValueArray = claimValues.Split(";");
+                var claimValueArray = claimValues.Split(";");
                 if (claimValueArray.Length < 3)
                 {
                     ModelState.AddModelError("", "Formato de reclamo inválido.");
                     return View();
                 }
 
-                string claimType = claimValueArray[0], claimValue = claimValueArray[1], claimIssuer = claimValueArray[2];
+                var claimType = claimValueArray[0];
+                var claimValue = claimValueArray[1];
+                var claimIssuer = claimValueArray[2];
 
-                Claim reclamo = User.Claims
-                    .Where(x => x.Type == claimType && x.Value == claimValue && x.Issuer == claimIssuer)
-                    .FirstOrDefault();
+                var reclamo = User.Claims
+                    .FirstOrDefault(x => x.Type == claimType && x.Value == claimValue && x.Issuer == claimIssuer);
 
                 if (reclamo == null)
                 {
@@ -85,10 +91,18 @@ namespace Identidad.Controllers
                     return View();
                 }
 
-                IdentityResult resultado = await userManager.RemoveClaimAsync(usuario, reclamo);
+                var resultado = await _userManager.RemoveClaimAsync(usuario, reclamo);
 
                 if (resultado.Succeeded)
                 {
+                    await _auditLogger.LogClaimChangeAsync(usuario.Id, claimType, claimValue, "Remove");
+
+                    // Actualizar claims en HttpContext
+                    var updatedClaims = await _userManager.GetClaimsAsync(usuario);
+                    var identity = new ClaimsIdentity(updatedClaims, CookieAuthenticationDefaults.AuthenticationScheme);
+                    var principal = new ClaimsPrincipal(identity);
+                    await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
+
                     return RedirectToAction("Index");
                 }
                 else
@@ -103,6 +117,7 @@ namespace Identidad.Controllers
 
             return View();
         }
+
 
         //[Authorize(Policy = "Segundo Email")]
         public ViewResult Proyecto()
@@ -120,7 +135,7 @@ namespace Identidad.Controllers
         public async Task<IActionResult> AccesoPrivado(string titulo)
         {
             string[] UsuariosPermitidos = { "espana", "turbias" };
-            AuthorizationResult resultado = await authService.AuthorizeAsync(User, UsuariosPermitidos, "AccesoPrivado");
+            AuthorizationResult resultado = await _authService.AuthorizeAsync(User, UsuariosPermitidos, "AccesoPrivado");
 
             if (resultado.Succeeded)
             {

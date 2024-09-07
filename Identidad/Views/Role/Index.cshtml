@@ -1,10 +1,59 @@
 ﻿@model IEnumerable<Microsoft.AspNetCore.Identity.IdentityRole>
 
-<h1 class="bg-info text-white">Todos los Roles Roles</h1>
-<a asp-action="Create" class="btn btn-secondary">Crear un Rol</a>
+<style>
+    /* Contenedor para alinear el botón a la derecha */
+    .button-container {
+        text-align: center; /* Alinea los elementos a la derecha */
+        margin-bottom: 1rem; /* Espacio debajo del botón */
+    }
 
-<table class="table table-sm table-bordered table-bordered">
-    <tr><th>ID</th><th>Nombre</th><th>Users</th><th>Update</th><th>Eliminar</th></tr>
+    /* Asegúrate de que el botón sea azul */
+    .btn-info-custom {
+        background-color: #007bff; /* Color azul */
+        color: white; /* Texto en blanco */
+        border: none; /* Sin borde */
+        border-radius: 0.375rem; /* Bordes redondeados */
+        padding: 0.5rem 1rem; /* Espaciado interno */
+        text-align: center; /* Texto centrado */
+        display: inline-block; /* El botón se comporta como un elemento en línea pero con propiedades de bloque */
+    }
+
+    /* Color de fondo gris claro para la fila del encabezado */
+    .table-header {
+        background-color: red; /* Gris claro */
+        text-align: center; /* Centra el texto horizontalmente */
+    }
+
+        /* Asegúrate de que el texto en los encabezados de la tabla esté centrado */
+        .table-header th {
+            vertical-align: middle; /* Centra verticalmente el texto en el encabezado */
+        }
+
+    .contain-container {
+        width: 100%; /* Asegura que el contenedor ocupe todo el ancho disponible */
+        overflow: auto; /* Asegura que no haya problemas de desbordamiento */
+    }
+
+    /* Centrar el contenido en las celdas */
+    .table td {
+        text-align: center;
+    }
+
+</style>
+
+
+<h1 class="text-black">Roles Empleados</h1>
+
+
+
+<table class="table table-bordered table-striped" id="myTable">
+    <tr class="table-header">
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Users</th>
+        <th>Update</th>
+        <th>Eliminar</th>
+    </tr>
     @foreach (var rol in Model)
     {
         <tr>
@@ -22,3 +71,7 @@
         </tr>
     }
 </table>
+
+<div class="button-container">
+    <a asp-action="Create" class="btn btn-info btn-info-custom">Crear un Rol</a>
+</div>

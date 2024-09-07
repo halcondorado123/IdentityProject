@@ -1,4 +1,5 @@
 ﻿using Identidad.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
@@ -21,7 +22,7 @@ namespace Identidad.Controllers
             return View(_roleManager.Roles);
         }
 
-        // Peticion HHTP GEt, para poder crear un rol
+        // Peticion HTTP GEt, para poder crear un rol
         public IActionResult Create()
         {
             return View();
@@ -29,6 +30,7 @@ namespace Identidad.Controllers
 
         // Permitira crear el usuario en base de datos.
         [HttpPost]
+        [Authorize(Roles = "Administración")]
         public async Task<IActionResult> Create([Required] string nombre)
         {
             if (ModelState.IsValid)

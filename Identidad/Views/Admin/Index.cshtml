@@ -1,28 +1,153 @@
 @model IEnumerable<AppUsuario>
 
-<h1 class="bg-info text-white">Todos los Usuarios</h1>
-@* <a asp-action="Create" class="btn btn-secondary">Crear un Usuario</a> *@
-<a asp-controller="Admin" asp-action="Create" class="nav-link text-white">Crear Usuario</a>
 
-<table class="table table-sm table-bordered">
-    <tr><th>ID</th><th>Nombre</th><th>Email</th></tr>
-    @foreach (AppUsuario Usuario in Model)
-    {
-        <tr>
-            <td>@Usuario.Id</td>
-            <td>@Usuario.UserName</td>
-            <td>@Usuario.Email</td>
-            <td>
-                <a class="btn btn-sm btn-primary" asp-action="Update" asp-route-id="@Usuario.Id">Actualizar</a>
-            </td>
-
-            <td>
-                <form asp-action="Delete" asp-route-id="@Usuario.Id" method="post">
-                    <button type="submit" class="btn btn-sm btn-danger">Eliminar</button>
-                </form>
-            </td>
-        </tr>
+<style>
+    /* Asegúrate de que el botón sea azul */
+    .btn-info-custom {
+        background-color: #007bff; /* Color azul */
+        color: white; /* Texto en blanco */
+        border: none; /* Sin borde */
+        border-radius: 0.375rem; /* Bordes redondeados */
+        padding: 0.5rem 1rem; /* Espaciado interno */
+        text-align: center; /* Texto centrado */
+        display: inline-block; /* El botón se comporta como un elemento en línea pero con propiedades de bloque */
     }
-</table>
 
+    /* Contenedor para alinear el botón a la derecha */
+    .button-container {
+        text-align: center; /* Alinea los elementos a la derecha */
+        margin-bottom: 1rem; /* Espacio debajo del botón */
+    }
+
+    /* Color de fondo gris claro para la fila del encabezado */
+    .table-header {
+        background-color: red; /* Gris claro */
+        text-align: center; /* Centra el texto horizontalmente */
+    }
+
+        /* Asegúrate de que el texto en los encabezados de la tabla esté centrado */
+        .table-header th {
+            vertical-align: middle; /* Centra verticalmente el texto en el encabezado */
+        }
+
+    .contain-container {
+        width: 100%; /* Asegura que el contenedor ocupe todo el ancho disponible */
+        overflow: auto; /* Asegura que no haya problemas de desbordamiento */
+    }
+
+    /* Centrar el contenido en las celdas */
+    .table td {
+        text-align: center;
+    }
+
+    /* Estilos personalizados para los botones */
+    .btn-custom-primary {
+        background-color: #007bff; /* Azul */
+        color: white;
+        border: none;
+        border-radius: 0.375rem;
+        padding: 0.5rem 1rem;
+        transition: background-color 0.3s;
+    }
+
+        .btn-custom-primary:hover {
+            background-color: #0056b3; /* Azul más oscuro */
+        }
+
+    .btn-custom-danger {
+        background-color: #dc3545; /* Rojo */
+        color: white;
+        border: none;
+        border-radius: 0.375rem;
+        padding: 0.5rem 1rem;
+        transition: background-color 0.3s;
+    }
+
+        .btn-custom-danger:hover {
+            background-color: #c82333; /* Rojo más oscuro */
+        }
+</style>
+
+<h2 style="text-align: center; margin-top: 2%;">Control de Usuarios</h2>
+    <p style="text-align: justify; margin: 2% 6%">
+        En este módulo se podrán llevar a cabo la creación, actualización y eliminación de usuarios de la compañía. Toda la información generada será registrada y dará lugar a un seguimiento en nuestras bases de datos.
+    </p>
+
+<div class="container">
+    <!-- Input de búsqueda -->
+    <input class="form-control" id="myInput" type="text" placeholder="Buscar...">
+    <br>
+
+    <!-- Tabla de usuarios -->
+    <table class="table table-bordered table-striped" id="myTable">
+        <thead>
+            <tr class="table-header">
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Email</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (AppUsuario Usuario in Model)
+            {
+                <tr>
+                    <td>@Usuario.Id</td>
+                    <td>@Usuario.UserName</td>
+                    <td>@Usuario.Email</td>
+                    <td>
+                        <a class="btn btn-sm btn-primary" asp-action="Update" asp-route-id="@Usuario.Id">Actualizar</a>
+                        <form asp-action="Delete" asp-route-id="@Usuario.Id" method="post" style="display:inline;">
+                            <button type="submit" class="btn btn-sm btn-danger">Eliminar</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+
+            <tr id="noResults" style="display: none;">
+                <td colspan="4" class="text-center">No se encontraron resultados</td>
+            </tr>
+
+        </tbody>
+    </table>
+
+
+</div>
+
+<div class="button-container">
+    <a asp-controller="Admin" asp-action="Create" class="btn btn-info btn-info-custom">Crear Usuario</a>
+</div>
+
+<!-- Scripts -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+
+<script>
+    $(document).ready(function () {
+        $("#myInput").on("keyup", function () {
+            var value = $(this).val().toLowerCase();
+            var rows = $("#myTable tbody tr");
+            var noResults = $("#noResults");
+
+            var found = false;
+            rows.each(function () {
+                var row = $(this);
+                if (row.text().toLowerCase().indexOf(value) > -1) {
+                    row.show();
+                    found = true;
+                } else {
+                    row.hide();
+                }
+            });
+
+            // Show or hide the "No results" row based on whether any rows were found
+            if (found) {
+                noResults.hide();
+            } else {
+                noResults.show();
+            }
+        });
+    });
+</script>
 

@@ -1,3 +1,4 @@
+using Identidad.Helpers;
 using Identidad.IdentityPolicies;
 using Identidad.Models;
 using Identidad.PoliticaPersonalizada;
@@ -33,10 +34,11 @@ builder.Services.Configure<IdentityOptions>(options =>
     options.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 });
 
+builder.Services.AddTransient<AuditLogger>();
+
 // Establecer la politica de password personalizada en clase PoliticaPassPersonalizada
 builder.Services.AddTransient<IPasswordValidator<AppUsuario>, PoliticaPassPersonalizada>();
 builder.Services.AddTransient<IUserValidator<AppUsuario>, PoliticaUsuarioEmailPersonalizada>();
-
 
 // -- Es importante registrar los servicio en esta seccion
 // Registrar la clase de autorizacion por IAuthorizationHandler con la clase o servicio ControladorPermitirUsuarios
@@ -52,32 +54,25 @@ builder.Services.ConfigureApplicationCookie(options => {
     options.SlidingExpiration = true;
 });
 
+builder.Services.AddHttpContextAccessor();
 
-// Politica de servicio 01
+// Configura las políticas de autorización
 builder.Services.AddAuthorization(options =>
 {
-    // Aqui se establece el nombre de la politica
+    // Política "Segundo Email"
     options.AddPolicy("Segundo Email", policy =>
     {
         policy.RequireRole("Administración");
         policy.RequireClaim("segundoemail", "Turbias@gmail.com");
     });
-});
 
-// Politica de servicio 01
-builder.Services.AddAuthorization(options =>
-{
-    // Aqui se establece el nombre de la politica
+    // Política "PermitirUsuarios"
     options.AddPolicy("PermitirUsuarios", policy =>
     {
         policy.AddRequirements(new PoliticaPermisosUsuario("espana"));
     });
-});
 
-// Politica de servicio 03
-builder.Services.AddAuthorization(options =>
-{
-    // Aqui se establece el nombre de la politica
+    // Política "AccesoPrivado"
     options.AddPolicy("AccesoPrivado", policy =>
     {
         policy.AddRequirements(new PoliticaPermitirPrivado());
