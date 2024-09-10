@@ -1,12 +1,4 @@
-@using Identidad.Models.ModelUsuario
 @model Usuario
-
-@{
-    var paises = ListUtils.GetPaises();
-    var departamentos = ListUtils.GetDepartamentos();
-    var municipios = ListUtils.GetMunicipios();
-    var contratos = ListUtils.GetContratos();
-}
 
 <h1 class="bg-info text-white">Actualizar Usuario</h1>
 <a asp-action="Index" class="btn btn-secondary">Atrás</a>
@@ -66,23 +58,39 @@
     </div>
 
     <div class="form-group">
-        <label asp-for="PaisNacimientoId"></label>
-        <select asp-for="PaisNacimientoId" class="form-control" asp-items="@(new SelectList(ListUtils.GetPaises(), "Value", "Text"))">
-            <option selected disabled value="">Selecciona un país</option>
+        <label asp-for="PaisNacimiento"></label>
+        <select asp-for="PaisNacimiento" class="form-control">
+            <option value="">Selecciona un país</option>
+            <option value="01">Colombia</option>
+            <!-- Agrega más países si es necesario -->
         </select>
     </div>
 
     <div class="form-group">
-        <label asp-for="DepartamentoNacimientoId"></label>
-        <select asp-for="DepartamentoNacimientoId" class="form-control" asp-items="@(new SelectList(ListUtils.GetDepartamentos(), "Value", "Text"))">
-            <option selected disabled value="">Selecciona un departamento</option>
+        <label asp-for="DepartamentoNacimiento"></label>
+        <select asp-for="DepartamentoNacimiento" class="form-control">
+            <option value="">Selecciona un departamento</option>
+            <option value="01">Amazonas</option>
+            <option value="05">Antioquia</option>
+            <option value="08">Atlántico</option>
+            <option value="11">Bogotá, D.C.</option>
+            <option value="13">Bolívar</option>
+            <option value="15">Boyacá</option>
+            <option value="17">Caldas</option>
+            <option value="18">Caquetá</option>
+            <option value="19">Casanare</option>
+            <option value="20">Cauca</option>
+            <!-- Agrega más departamentos si es necesario -->
         </select>
     </div>
 
     <div class="form-group">
-        <label asp-for="MunicipioNacimientoId"></label>
-        <select asp-for="MunicipioNacimientoId" class="form-control" asp-items="@(new SelectList(ListUtils.GetMunicipios(), "Value", "Text"))">
-            <option selected disabled value="">Selecciona un municipio</option>
+        <label asp-for="MunicipioNacimiento"></label>
+        <select asp-for="MunicipioNacimiento" class="form-control">
+            <option value="">Selecciona un municipio</option>
+            <option value="001">Municipio A</option>
+            <option value="002">Municipio B</option>
+            <!-- Agrega más municipios si es necesario -->
         </select>
     </div>
 
@@ -92,24 +100,43 @@
     </div>
 
     <div class="form-group">
-        <label asp-for="PaisDomicilioId"></label>
-        <select asp-for="PaisDomicilioId" class="form-control" asp-items="@(new SelectList(ListUtils.GetPaises(), "Value", "Text"))">
+        <label asp-for="PaisDomicilio"></label>
+        <select asp-for="PaisDomicilio" class="form-control">
             <option value="">Selecciona un país</option>
+            <option value="01">Colombia</option>
+            <!-- Agrega más países si es necesario -->
         </select>
     </div>
+
     <div class="form-group">
-        <label asp-for="DepartamentoDomicilioId"></label>
-        <select asp-for="DepartamentoDomicilioId" class="form-control" asp-items="@(new SelectList(ListUtils.GetDepartamentos(), "Value", "Text"))">
-            <option selected disabled value="">Selecciona un departamento</option>
+        <label asp-for="DepartamentoDomicilio"></label>
+        <select asp-for="DepartamentoDomicilio" class="form-control">
+            <option value="">Selecciona un departamento</option>
+            <option value="01">Amazonas</option>
+            <option value="05">Antioquia</option>
+            <option value="08">Atlántico</option>
+            <option value="11">Bogotá, D.C.</option>
+            <option value="13">Bolívar</option>
+            <option value="15">Boyacá</option>
+            <option value="17">Caldas</option>
+            <option value="18">Caquetá</option>
+            <option value="19">Casanare</option>
+            <option value="20">Cauca</option>
+            <!-- Agrega más departamentos si es necesario -->
         </select>
     </div>
+
+
     <div class="form-group">
-        <label asp-for="MunicipioDomicilioId"></label>
-        <select asp-for="MunicipioDomicilioId" class="form-control" asp-items="@(new SelectList(ListUtils.GetMunicipios(), "Value", "Text"))">
-            <option selected disabled value="">Selecciona un municipio</option>
+        <label asp-for="MunicipioDomicilio"></label>
+        <select asp-for="MunicipioDomicilio" class="form-control">
+            <option value="">Selecciona un municipio</option>
+            <option value="001">Municipio A</option>
+            <option value="002">Municipio B</option>
+            <!-- Agrega más municipios si es necesario -->
         </select>
     </div>
-    
+
     <div class="form-group">
         <label asp-for="EmailPersonal"></label>
         <input asp-for="EmailPersonal" class="form-control" />
@@ -126,10 +153,22 @@
         <label asp-for="TelefonoFijo"></label>
         <input asp-for="TelefonoFijo" class="form-control" />
     </div>
+
     <div class="form-group">
-        <label asp-for="ContratoEmpleadoId"></label>
-        <select asp-for="ContratoEmpleadoId" class="form-control" asp-items="@(new SelectList(contratos, "Value", "Text"))">
-            <option selected disabled value="">Selecciona un contrato</option>
+        <label asp-for="ContratoEmpleado"></label>
+        <select asp-for="ContratoEmpleado" class="form-control">
+            <option value="">Selecciona un contrato</option>
+            <option value="1">Contrato a Término Indefinido</option>
+            <option value="2">Contrato a Término Fijo</option>
+            <option value="3">Contrato de Obra o Labor</option>
+            <option value="4">Contrato de Aprendizaje</option>
+            <option value="5">Contrato de Servicios</option>
+            <option value="6">Contrato Temporal</option>
+            <option value="7">Contrato de Trabajo por Horas</option>
+            <option value="8">Contrato de Empleo en Mínimo Vital</option>
+            <option value="9">Contrato de Trabajo en el Exterior</option>
+            <option value="10">Contrato de Trabajo en la Industria</option>
+            <!-- Agrega más contratos si es necesario -->
         </select>
     </div>
 

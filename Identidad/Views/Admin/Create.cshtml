@@ -35,12 +35,12 @@
 
     <form method="post" class="mt-4">
         <div class="form-group">
-            <label asp-for="Username" class="form-label"></label>
-            <input asp-for="Username" class="form-control" />
-            <span asp-validation-for="Username" class="text-danger"></span>
+            <label asp-for="NombreUsuario" class="form-label"></label>
+            <input asp-for="NombreUsuario" class="form-control" />
+            <span asp-validation-for="NombreUsuario" class="text-danger"></span>
         </div>
 
-        <div class="form-group">
+        <div class="form-group mt-3">
             <label asp-for="Nombres" class="form-label"></label>
             <input asp-for="Nombres" class="form-control" />
             <span asp-validation-for="Nombres" class="text-danger"></span>
@@ -96,29 +96,59 @@
 
         <!-- Selección de País de Nacimiento -->
         <div class="form-group mt-3">
-            <label asp-for="PaisNacimientoId" class="form-label"></label>
-            <select asp-for="PaisNacimientoId" class="form-control" asp-items="@(ViewBag.Paises)">
+            <label asp-for="PaisNacimiento" class="form-label"></label>
+            <select asp-for="PaisNacimiento" class="form-control">
                 <option value="">Selecciona un país de nacimiento</option>
+                <option value="CO">Colombia</option>
+                <option value="AR">Argentina</option>
+                <option value="BR">Brasil</option>
+                <option value="CL">Chile</option>
+                <option value="PE">Perú</option>
+                <option value="VE">Venezuela</option>
+                <option value="MX">México</option>
+                <option value="EC">Ecuador</option>
+                <option value="UY">Uruguay</option>
+                <option value="PY">Paraguay</option>
             </select>
-            <span asp-validation-for="PaisNacimientoId" class="text-danger"></span>
+            <span asp-validation-for="PaisNacimiento" class="text-danger"></span>
         </div>
 
         <!-- Selección de Departamento de Nacimiento -->
         <div class="form-group mt-3">
-            <label asp-for="DepartamentoNacimientoId" class="form-label"></label>
-            <select asp-for="DepartamentoNacimientoId" class="form-control" asp-items="@(ViewBag.Departamentos)">
+            <label asp-for="DepartamentoNacimiento" class="form-label"></label>
+            <select asp-for="DepartamentoNacimiento" class="form-control">
                 <option value="">Selecciona un departamento de nacimiento</option>
+                <option value="01">Amazonas</option>
+                <option value="05">Antioquia</option>
+                <option value="08">Atlántico</option>
+                <option value="11">Bogotá, D.C.</option>
+                <option value="13">Bolívar</option>
+                <option value="15">Boyacá</option>
+                <option value="17">Caldas</option>
+                <option value="18">Caquetá</option>
+                <option value="19">Casanare</option>
+                <option value="20">Cauca</option>
             </select>
-            <span asp-validation-for="DepartamentoNacimientoId" class="text-danger"></span>
+            <span asp-validation-for="DepartamentoNacimiento" class="text-danger"></span>
         </div>
 
         <!-- Selección de Municipio de Nacimiento -->
         <div class="form-group mt-3">
-            <label asp-for="MunicipioNacimientoId" class="form-label"></label>
-            <select asp-for="MunicipioNacimientoId" class="form-control" asp-items="@(ViewBag.Municipios)">
+            <label asp-for="MunicipioNacimiento" class="form-label"></label>
+            <select asp-for="MunicipioNacimiento" class="form-control">
                 <option value="">Selecciona un municipio de nacimiento</option>
+                <option value="001">Leticia</option>
+                <option value="002">Puerto Nariño</option>
+                <option value="01001">Medellín</option>
+                <option value="01002">Envigado</option>
+                <option value="08001">Barranquilla</option>
+                <option value="08078">Soledad</option>
+                <option value="11001">Bogotá</option>
+                <option value="13052">Cartagena</option>
+                <option value="15001">Tunja</option>
+                <option value="17001">Manizales</option>
             </select>
-            <span asp-validation-for="MunicipioNacimientoId" class="text-danger"></span>
+            <span asp-validation-for="MunicipioNacimiento" class="text-danger"></span>
         </div>
 
         <!-- Dirección de domicilio -->
@@ -130,29 +160,61 @@
 
         <!-- Selección de País de Domicilio -->
         <div class="form-group mt-3">
-            <label asp-for="PaisDomicilioId" class="form-label"></label>
-            <select asp-for="PaisDomicilioId" class="form-control" asp-items="@(ViewBag.Paises)">
+            <label asp-for="PaisDomicilio" class="form-label"></label>
+            <select asp-for="PaisDomicilio" class="form-control">
                 <option value="">Selecciona un país de domicilio</option>
+                <option value="CO">Colombia</option>
+                <option value="AR">Argentina</option>
+                <option value="BR">Brasil</option>
+                <option value="CL">Chile</option>
+                <option value="PE">Perú</option>
+                <option value="VE">Venezuela</option>
+                <option value="MX">México</option>
+                <option value="EC">Ecuador</option>
+                <option value="UY">Uruguay</option>
+                <option value="PY">Paraguay</option>
             </select>
-            <span asp-validation-for="PaisDomicilioId" class="text-danger"></span>
+            <span asp-validation-for="PaisDomicilio" class="text-danger"></span>
         </div>
 
         <!-- Selección de Departamento de Domicilio -->
         <div class="form-group mt-3">
-            <label asp-for="DepartamentoDomicilioId" class="form-label"></label>
-            <select asp-for="DepartamentoDomicilioId" class="form-control" asp-items="@(ViewBag.Departamentos)">
+            <label asp-for="DepartamentoDomicilio" class="form-label"></label>
+            <select asp-for="DepartamentoDomicilio" class="form-control">
                 <option value="">Selecciona un departamento de domicilio</option>
+                <option value="01">Amazonas</option>
+                <option value="05">Antioquia</option>
+                <option value="08">Atlántico</option>
+                <option value="11">Bogotá, D.C.</option>
+                <option value="13">Bolívar</option>
+                <option value="15">Boyacá</option>
+                <option value="17">Caldas</option>
+                <option value="18">Caquetá</option>
+                <option value="19">Casanare</option>
+                <option value="20">Cauca</option>
+                <!-- Agrega más departamentos si es necesario -->
             </select>
-            <span asp-validation-for="DepartamentoDomicilioId" class="text-danger"></span>
+            <span asp-validation-for="DepartamentoDomicilio" class="text-danger"></span>
         </div>
 
         <!-- Selección de Municipio de Domicilio -->
         <div class="form-group mt-3">
-            <label asp-for="MunicipioDomicilioId" class="form-label"></label>
-            <select asp-for="MunicipioDomicilioId" class="form-control" asp-items="@(ViewBag.Municipios)">
+            <label asp-for="MunicipioDomicilio" class="form-label"></label>
+            <select asp-for="MunicipioDomicilio" class="form-control">
                 <option value="">Selecciona un municipio de domicilio</option>
+                <option value="001">Leticia</option>
+                <option value="002">Puerto Nariño</option>
+                <option value="01001">Medellín</option>
+                <option value="01002">Envigado</option>
+                <option value="08001">Barranquilla</option>
+                <option value="08078">Soledad</option>
+                <option value="11001">Bogotá</option>
+                <option value="13052">Cartagena</option>
+                <option value="15001">Tunja</option>
+                <option value="17001">Manizales</option>
+                <!-- Agrega más municipios si es necesario -->
             </select>
-            <span asp-validation-for="MunicipioDomicilioId" class="text-danger"></span>
+            <span asp-validation-for="MunicipioDomicilio" class="text-danger"></span>
         </div>
 
         <div class="form-group mt-3">
@@ -180,11 +242,21 @@
         </div>
 
         <div class="form-group mt-3">
-            <label asp-for="ContratoEmpleadoId" class="form-label"></label>
-            <select asp-for="ContratoEmpleadoId" class="form-control" asp-items="@(ViewBag.Contratos)">
+            <label asp-for="ContratoEmpleado" class="form-label"></label>
+            <select asp-for="ContratoEmpleado" class="form-control">
                 <option value="">Selecciona un contrato</option>
+                <option value="1">Contrato a Término Indefinido</option>
+                <option value="2">Contrato a Término Fijo</option>
+                <option value="3">Contrato de Obra o Labor</option>
+                <option value="4">Contrato de Aprendizaje</option>
+                <option value="5">Contrato de Servicios</option>
+                <option value="6">Contrato Temporal</option>
+                <option value="7">Contrato de Trabajo por Horas</option>
+                <option value="8">Contrato de Empleo en Mínimo Vital</option>
+                <option value="9">Contrato de Trabajo en el Exterior</option>
+                <option value="10">Contrato de Trabajo en la Industria</option>
             </select>
-            <span asp-validation-for="ContratoEmpleadoId" class="text-danger"></span>
+            <span asp-validation-for="ContratoEmpleado" class="text-danger"></span>
         </div>
 
         <div class="form-group mt-3">

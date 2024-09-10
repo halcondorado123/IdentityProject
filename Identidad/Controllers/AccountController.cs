@@ -33,33 +33,52 @@ namespace Identidad.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        [ValidateAntiForgeryToken]  // Evita multiples ataques de Hacking durante el proceso de Host
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(Login login)
         {
-
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                // Toma la dirección del correo electronico que es proporcionada por el usuario en el inicio de sesion
+                return View(login);
+            }
+
+            try
+            {
+                // Buscar el usuario por email
                 AppUsuario usuario = await userManager.FindByEmailAsync(login.Email);
 
                 if (usuario != null)
                 {
+                    // Intentar iniciar sesión
                     await signInManager.SignOutAsync();
-                    // false(1) no ingresar cookie de persistencia o mantenerse incluso despues de cerrado el navegador
-                    // false(2) Para no bloquear la cuenta, cuando falle el inicio de sesion
                     Microsoft.AspNetCore.Identity.SignInResult resultado = await signInManager.PasswordSignInAsync(usuario, login.Password, false, false);
 
                     if (resultado.Succeeded)
+                    {
                         return Redirect(login.ReturnUrl ?? "/");
+                    }
                     else
-                        ModelState.AddModelError("", "Se ha producido un error en el Login");
+                    {
+                        ModelState.AddModelError("", "Credenciales incorrectas. Por favor, inténtelo de nuevo.");
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError("", "No se encontró un usuario con este correo electrónico.");
                 }
             }
+            catch (Exception ex)
+            {
+                // Log de la excepción (puedes usar un servicio de logging aquí)
+                // Ejemplo: _logger.LogError(ex, "Error en el inicio de sesión");
+
+                ModelState.AddModelError("", "Se ha producido un error inesperado: " + ex.Message);
+            }
+
             return View(login);
         }
-
-        // Cierre de sesión
-        public async Task<IActionResult> Logout()
+    
+    // Cierre de sesión
+    public async Task<IActionResult> Logout()
         {
 
             await signInManager.SignOutAsync();

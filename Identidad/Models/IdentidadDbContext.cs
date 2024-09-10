@@ -7,11 +7,12 @@ namespace Identidad.Models
     public class IdentidadDbContext : IdentityDbContext<AppUsuario>
     {
         public DbSet<Usuario> Usuarios { get; set; }
-        public DbSet<PaisME> Paises { get; set; }
-        public DbSet<DepartamentoME> Departamentos { get; set; }
-        public DbSet<MunicipioME> Municipios { get; set; }
-        public DbSet<Contrato> Contratos { get; set; }
         public DbSet<ClaimAudit> ClaimAudits { get; set; }
+
+        //public DbSet<PaisME> Paises { get; set; }
+        //public DbSet<DepartamentoME> Departamentos { get; set; }
+        //public DbSet<MunicipioME> Municipios { get; set; }
+        //public DbSet<Contrato> Contratos { get; set; }
 
         public IdentidadDbContext(DbContextOptions<IdentidadDbContext> options)
             : base(options)
@@ -25,10 +26,9 @@ namespace Identidad.Models
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<ClaimAudit>()
-                .ToTable("ClaimAudit") // Verifica que este nombre coincida con la tabla en la base de datos
+                .ToTable("ClaimAudit")
                 .HasKey(ca => ca.Id);
 
-            // Otras configuraciones de entidad
         }
     }
 }

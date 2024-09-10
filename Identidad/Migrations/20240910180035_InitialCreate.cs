@@ -28,9 +28,31 @@ namespace Identidad.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    NombreUsuario = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Nombres = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Apellidos = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    Password = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TipoDocumento = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NumeroDocumento = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    FechaNacimiento = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Edad = table.Column<int>(type: "int", nullable: false),
+                    PaisNacimiento = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DepartamentoNacimiento = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    MunicipioNacimiento = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DireccionDomicilio = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PaisDomicilio = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DepartamentoDomicilio = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    MunicipioDomicilio = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    EmailPersonal = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    EmailInstitucional = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TelefonoCelular = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TelefonoFijo = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ContratoEmpleado = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Salario = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CargoEmpleado = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedEmail = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     EmailConfirmed = table.Column<bool>(type: "bit", nullable: false),
                     PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -46,6 +68,59 @@ namespace Identidad.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ClaimAudit",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ClaimType = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ClaimValue = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Action = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ChangedBy = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ClaimAudit", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Usuarios",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    NombreUsuario = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Nombres = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Apellidos = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Password = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TipoDocumento = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NumeroDocumento = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    FechaNacimiento = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Edad = table.Column<int>(type: "int", nullable: false),
+                    PaisNacimiento = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DepartamentoNacimiento = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    MunicipioNacimiento = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DireccionDomicilio = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PaisDomicilio = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DepartamentoDomicilio = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    MunicipioDomicilio = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    EmailPersonal = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    EmailInstitucional = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TelefonoCelular = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TelefonoFijo = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ContratoEmpleado = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Salario = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CargoEmpleado = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Usuarios", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -210,6 +285,12 @@ namespace Identidad.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "ClaimAudit");
+
+            migrationBuilder.DropTable(
+                name: "Usuarios");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

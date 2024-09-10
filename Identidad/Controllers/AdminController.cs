@@ -42,7 +42,7 @@ namespace Identidad.Controllers
                 // Crear el nuevo usuario para el sistema de autenticación
                 var appUsuario = new AppUsuario
                 {
-                    UserName = usuario.Username,
+                    UserName = usuario.NombreUsuario,
                     Nombres = usuario.Nombres,
                     Apellidos = usuario.Apellidos,
                     Email = usuario.Email,
@@ -50,18 +50,18 @@ namespace Identidad.Controllers
                     NumeroDocumento = usuario.NumeroDocumento,
                     FechaNacimiento = usuario.FechaNacimiento,
                     Edad = usuario.Edad,
-                    PaisNacimientoId = usuario.PaisNacimientoId,
-                    DepartamentoNacimientoId = usuario.DepartamentoNacimientoId,
-                    MunicipioNacimientoId = usuario.MunicipioNacimientoId,
+                    PaisNacimiento = usuario.PaisNacimiento,
+                    DepartamentoNacimiento = usuario.DepartamentoNacimiento,
+                    MunicipioNacimiento = usuario.MunicipioNacimiento,
                     DireccionDomicilio = usuario.DireccionDomicilio,
-                    PaisDomicilioId = usuario.PaisDomicilioId,
-                    DepartamentoDomicilioId = usuario.DepartamentoDomicilioId,
-                    MunicipioDomicilioId = usuario.MunicipioDomicilioId,
+                    PaisDomicilio = usuario.PaisDomicilio,
+                    DepartamentoDomicilio = usuario.DepartamentoDomicilio,
+                    MunicipioDomicilio = usuario.MunicipioDomicilio,
                     EmailPersonal = usuario.EmailPersonal,
                     EmailInstitucional = usuario.EmailInstitucional,
                     TelefonoCelular = usuario.TelefonoCelular,
                     TelefonoFijo = usuario.TelefonoFijo,
-                    ContratoEmpleadoId = usuario.ContratoEmpleadoId,
+                    ContratoEmpleado = usuario.ContratoEmpleado,
                     Salario = usuario.Salario,
                     CargoEmpleado = usuario.CargoEmpleado,
                 };
@@ -101,13 +101,6 @@ namespace Identidad.Controllers
                 }
             }
 
-            // Si llegamos a este punto, significa que hubo un error y se vuelve a cargar la vista
-            // Reestablecer los ViewBag para las listas desplegables
-            ViewBag.Paises = ListUtils.GetPaises();
-            ViewBag.Departamentos = ListUtils.GetDepartamentos();
-            ViewBag.Municipios = ListUtils.GetMunicipios();
-            ViewBag.Contratos = ListUtils.GetContratos();
-
             return View(usuario);
         }
 
@@ -118,6 +111,10 @@ namespace Identidad.Controllers
             AppUsuario usuario = await userManager.FindByIdAsync(id);
             if (usuario != null)
             {
+                //ViewBag.Paises = ListUtils.GetPaises();
+                //ViewBag.Departamentos = ListUtils.GetDepartamentos();
+                //ViewBag.Municipios = ListUtils.GetMunicipios();
+                //ViewBag.Contratos = ListUtils.GetContratos();
                 return View(usuario);
             }
             else
@@ -132,89 +129,74 @@ namespace Identidad.Controllers
         {
             if (!ModelState.IsValid)
             {
-                // Poblar listas desplegables en caso de error
-                ViewBag.Paises = ListUtils.GetPaises();
-                ViewBag.Departamentos = ListUtils.GetDepartamentos();
-                ViewBag.Municipios = ListUtils.GetMunicipios();
-                ViewBag.Contratos = ListUtils.GetContratos();
                 return View("Edit", usuario);
             }
 
             var existingUser = await userManager.FindByIdAsync(usuario.Id.ToString());
 
-            if (existingUser != null)
+            if (existingUser == null)
             {
-                existingUser.Nombres = usuario.Nombres;
-                existingUser.Apellidos = usuario.Apellidos;
-                existingUser.Email = usuario.Email;
-                existingUser.Password = usuario.Password;
-                existingUser.TipoDocumento = usuario.TipoDocumento;
-                existingUser.NumeroDocumento = usuario.NumeroDocumento;
-                existingUser.FechaNacimiento = usuario.FechaNacimiento;
-                existingUser.Edad = usuario.Edad;
-                existingUser.PaisNacimientoId = usuario.PaisNacimientoId;
-                existingUser.DepartamentoNacimientoId = usuario.DepartamentoNacimientoId;
-                existingUser.MunicipioNacimientoId = usuario.MunicipioNacimientoId;
-                existingUser.DireccionDomicilio = usuario.DireccionDomicilio;
-                existingUser.PaisDomicilioId = usuario.PaisDomicilioId;
-                existingUser.DepartamentoDomicilioId = usuario.DepartamentoDomicilioId;
-                existingUser.MunicipioDomicilioId = usuario.MunicipioDomicilioId;
-                existingUser.EmailPersonal = usuario.EmailPersonal;
-                existingUser.EmailInstitucional = usuario.EmailInstitucional;
-                existingUser.TelefonoCelular = usuario.TelefonoCelular;
-                existingUser.TelefonoFijo = usuario.TelefonoFijo;
-                existingUser.ContratoEmpleado = usuario.ContratoEmpleado;
-                existingUser.Salario = usuario.Salario;
-                existingUser.CargoEmpleado = usuario.CargoEmpleado;
+                return NotFound();
+            }
 
+            // Actualizar los campos del usuario
+            existingUser.Nombres = usuario.Nombres;
+            existingUser.Apellidos = usuario.Apellidos;
+            existingUser.Email = usuario.Email;
+            existingUser.TipoDocumento = usuario.TipoDocumento;
+            existingUser.NumeroDocumento = usuario.NumeroDocumento;
+            existingUser.FechaNacimiento = usuario.FechaNacimiento;
+            existingUser.Edad = usuario.Edad;
+            existingUser.PaisNacimiento = usuario.PaisNacimiento;
+            existingUser.DepartamentoNacimiento = usuario.DepartamentoNacimiento;
+            existingUser.MunicipioNacimiento = usuario.MunicipioNacimiento;
+            existingUser.DireccionDomicilio = usuario.DireccionDomicilio;
+            existingUser.PaisDomicilio = usuario.PaisDomicilio;
+            existingUser.DepartamentoDomicilio = usuario.DepartamentoDomicilio;
+            existingUser.MunicipioDomicilio = usuario.MunicipioDomicilio;
+            existingUser.EmailPersonal = usuario.EmailPersonal;
+            existingUser.EmailInstitucional = usuario.EmailInstitucional;
+            existingUser.TelefonoCelular = usuario.TelefonoCelular;
+            existingUser.TelefonoFijo = usuario.TelefonoFijo;
+            existingUser.ContratoEmpleado = usuario.ContratoEmpleado;
+            existingUser.Salario = usuario.Salario;
+            existingUser.CargoEmpleado = usuario.CargoEmpleado;
 
-                if (!string.IsNullOrEmpty(password))
+            // Manejo de la contraseña
+            if (!string.IsNullOrEmpty(password))
+            {
+                var passwordResult = await passwordValidator.ValidateAsync(userManager, existingUser, password);
+
+                if (passwordResult.Succeeded)
                 {
-                    var passwordResult = await passwordValidator.ValidateAsync(userManager, existingUser, password);
-
-                    if (passwordResult.Succeeded)
-                    {
-                        existingUser.PasswordHash = passwordHasher.HashPassword(existingUser, password);
-                    }
-                    else
-                    {
-                        foreach (var error in passwordResult.Errors)
-                        {
-                            ModelState.AddModelError("", error.Description);
-                        }
-
-                        // Poblar listas desplegables en caso de error
-                        ViewBag.Paises = ListUtils.GetPaises();
-                        ViewBag.Departamentos = ListUtils.GetDepartamentos();
-                        ViewBag.Municipios = ListUtils.GetMunicipios();
-                        ViewBag.Contratos = ListUtils.GetContratos();
-                        return View("Edit", usuario);
-                    }
-                }
-
-                var result = await userManager.UpdateAsync(existingUser);
-
-                if (result.Succeeded)
-                {
-                    return RedirectToAction("Index");
+                    existingUser.PasswordHash = passwordHasher.HashPassword(existingUser, password);
                 }
                 else
                 {
-                    foreach (var error in result.Errors)
+                    foreach (var error in passwordResult.Errors)
                     {
                         ModelState.AddModelError("", error.Description);
                     }
 
-                    // Poblar listas desplegables en caso de error
-                    ViewBag.Paises = ListUtils.GetPaises();
-                    ViewBag.Departamentos = ListUtils.GetDepartamentos();
-                    ViewBag.Municipios = ListUtils.GetMunicipios();
-                    ViewBag.Contratos = ListUtils.GetContratos();
                     return View("Edit", usuario);
                 }
             }
 
-            return NotFound();
+            var updateResult = await userManager.UpdateAsync(existingUser);
+
+            if (updateResult.Succeeded)
+            {
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                foreach (var error in updateResult.Errors)
+                {
+                    ModelState.AddModelError("", error.Description);
+                }
+
+                return View("Edit", usuario);
+            }
         }
 
 

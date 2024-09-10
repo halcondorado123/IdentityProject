@@ -30,8 +30,26 @@ namespace Identidad.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
+                    b.Property<string>("Apellidos")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CargoEmpleado")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ContratoEmpleado")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DepartamentoDomicilio")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DepartamentoNacimiento")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DireccionDomicilio")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Edad")
@@ -44,11 +62,32 @@ namespace Identidad.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
+                    b.Property<string>("EmailInstitucional")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("EmailPersonal")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("FechaNacimiento")
+                        .HasColumnType("datetime2");
+
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
 
                     b.Property<DateTimeOffset?>("LockoutEnd")
                         .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("MunicipioDomicilio")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MunicipioNacimiento")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NombreUsuario")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Nombres")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256)
@@ -58,8 +97,17 @@ namespace Identidad.Migrations
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
-                    b.Property<int>("Pais")
-                        .HasColumnType("int");
+                    b.Property<string>("NumeroDocumento")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PaisDomicilio")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PaisNacimiento")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Password")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PasswordHash")
                         .HasColumnType("nvarchar(max)");
@@ -71,10 +119,18 @@ namespace Identidad.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("Salario")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TelefonoCelular")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TelefonoFijo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TipoDocumento")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("TwoFactorEnabled")
@@ -131,6 +187,88 @@ namespace Identidad.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ClaimAudit", (string)null);
+                });
+
+            modelBuilder.Entity("Identidad.Models.Usuario", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Apellidos")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CargoEmpleado")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ContratoEmpleado")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DepartamentoDomicilio")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DepartamentoNacimiento")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DireccionDomicilio")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Edad")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("EmailInstitucional")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("EmailPersonal")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("FechaNacimiento")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("MunicipioDomicilio")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MunicipioNacimiento")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NombreUsuario")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Nombres")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NumeroDocumento")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PaisDomicilio")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PaisNacimiento")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Password")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Salario")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TelefonoCelular")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TelefonoFijo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TipoDocumento")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Usuarios");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
