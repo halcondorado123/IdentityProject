@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Identidad.Migrations
 {
     [DbContext(typeof(IdentidadDbContext))]
-    [Migration("20240910180035_InitialCreate")]
+    [Migration("20240910205413_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -85,9 +85,6 @@ namespace Identidad.Migrations
                     b.Property<string>("MunicipioNacimiento")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("NombreUsuario")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Nombres")
                         .HasColumnType("nvarchar(max)");
 
@@ -106,9 +103,6 @@ namespace Identidad.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PaisNacimiento")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Password")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PasswordHash")
@@ -193,11 +187,8 @@ namespace Identidad.Migrations
 
             modelBuilder.Entity("Identidad.Models.Usuario", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    b.Property<string>("NombreUsuario")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Apellidos")
                         .HasColumnType("nvarchar(max)");
@@ -238,9 +229,6 @@ namespace Identidad.Migrations
                     b.Property<string>("MunicipioNacimiento")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("NombreUsuario")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Nombres")
                         .HasColumnType("nvarchar(max)");
 
@@ -268,7 +256,7 @@ namespace Identidad.Migrations
                     b.Property<string>("TipoDocumento")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("NombreUsuario");
 
                     b.ToTable("Usuarios");
                 });

@@ -43,9 +43,10 @@ namespace Identidad.Controllers
                 var appUsuario = new AppUsuario
                 {
                     UserName = usuario.NombreUsuario,
+                    Email = usuario.EmailCorporativo,
+
                     Nombres = usuario.Nombres,
                     Apellidos = usuario.Apellidos,
-                    Email = usuario.Email,
                     TipoDocumento = usuario.TipoDocumento,
                     NumeroDocumento = usuario.NumeroDocumento,
                     FechaNacimiento = usuario.FechaNacimiento,
@@ -58,12 +59,11 @@ namespace Identidad.Controllers
                     DepartamentoDomicilio = usuario.DepartamentoDomicilio,
                     MunicipioDomicilio = usuario.MunicipioDomicilio,
                     EmailPersonal = usuario.EmailPersonal,
-                    EmailInstitucional = usuario.EmailInstitucional,
                     TelefonoCelular = usuario.TelefonoCelular,
                     TelefonoFijo = usuario.TelefonoFijo,
                     ContratoEmpleado = usuario.ContratoEmpleado,
                     Salario = usuario.Salario,
-                    CargoEmpleado = usuario.CargoEmpleado,
+                    CargoEmpleado = usuario.CargoEmpleado
                 };
 
                 // Crear el usuario en la base de datos de identidad
@@ -111,10 +111,6 @@ namespace Identidad.Controllers
             AppUsuario usuario = await userManager.FindByIdAsync(id);
             if (usuario != null)
             {
-                //ViewBag.Paises = ListUtils.GetPaises();
-                //ViewBag.Departamentos = ListUtils.GetDepartamentos();
-                //ViewBag.Municipios = ListUtils.GetMunicipios();
-                //ViewBag.Contratos = ListUtils.GetContratos();
                 return View(usuario);
             }
             else
@@ -123,81 +119,76 @@ namespace Identidad.Controllers
             }
         }
 
+        //[HttpPost]
+        //public async Task<IActionResult> Update(string id, string email, string password, string Nombres, string Apellidos, string TipoDocumento, string NumeroDocumento,
+        //    DateTime? FechaNacimiento, int Edad, string PaisNacimiento, string DepartamentoNacimiento, string MunicipioNacimiento, string DireccionDomicilio,
+        //    string PaisDomicilio, string DepartaqmentoNacimiento, string MunicipioDomicilio, string EmailPersonal, string EmailInstitucional, string TelefonoCelular, string TelefonoFijo,
+        //    string ContratoEmpleado, string Salario, string CargoEmpleado)
+        //{
+        //    AppUsuario usuario = await userManager.FindByIdAsync(id);
 
-        [HttpPost]
-        public async Task<IActionResult> Update(Usuario usuario, string password)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View("Edit", usuario);
-            }
+        //    if (usuario != null)
+        //    {
+        //        IdentityResult emailValido = null;
+        //        if (!string.IsNullOrEmpty(email))
+        //        {
+        //            emailValido = await userValidator.ValidateAsync(userManager, usuario);
+        //            if (emailValido.Succeeded)
+        //                usuario.Email = email;
+        //            else
+        //            {
+        //                Errors(emailValido);
+        //            }
+        //        }
+        //        else
+        //        {
+        //            ModelState.AddModelError("", "El Email no puede estar vacio");
+        //        }
 
-            var existingUser = await userManager.FindByIdAsync(usuario.Id.ToString());
+        //        IdentityResult passValido = null;
+        //        if (!string.IsNullOrEmpty(password))
+        //        {
+        //            passValido = await passwordValidator.ValidateAsync(userManager, usuario, password);
+        //            if (passValido.Succeeded)
+        //                usuario.PasswordHash = passwordHasher.HashPassword(usuario, password);
+        //            else
+        //            {
+        //                Errors(passValido);
+        //            }
+        //        }
 
-            if (existingUser == null)
-            {
-                return NotFound();
-            }
+        //        usuario.Nombres = Nombres;
+        //        usuario.Apellidos = Apellidos;
+        //        usuario.TipoDocumento = TipoDocumento;
+        //        usuario.NumeroDocumento = NumeroDocumento;
+        //        usuario.FechaNacimiento = FechaNacimiento;
+        //        usuario.Edad = Edad;
+        //        usuario.PaisNacimiento = PaisNacimiento;
+        //        usuario.DepartamentoNacimiento = DepartamentoNacimiento;
+        //        usuario.MunicipioNacimiento = MunicipioNacimiento;
+        //        usuario.DireccionDomicilio = DireccionDomicilio;
+        //        usuario.PaisDomicilio = PaisDomicilio;
+        //        usuario.DepartamentoDomicilio = DepartaqmentoNacimiento;
+        //        usuario.MunicipioDomicilio = MunicipioDomicilio;
+        //        usuario.EmailPersonal = EmailPersonal;
+        //        usuario.EmailInstitucional = EmailInstitucional;
+        //        usuario.TelefonoCelular = TelefonoCelular;
+        //        usuario.TelefonoFijo = TelefonoFijo;
+        //        usuario.ContratoEmpleado = ContratoEmpleado;
+        //        usuario.Salario = Salario;
+        //        usuario.CargoEmpleado = CargoEmpleado;
 
-            // Actualizar los campos del usuario
-            existingUser.Nombres = usuario.Nombres;
-            existingUser.Apellidos = usuario.Apellidos;
-            existingUser.Email = usuario.Email;
-            existingUser.TipoDocumento = usuario.TipoDocumento;
-            existingUser.NumeroDocumento = usuario.NumeroDocumento;
-            existingUser.FechaNacimiento = usuario.FechaNacimiento;
-            existingUser.Edad = usuario.Edad;
-            existingUser.PaisNacimiento = usuario.PaisNacimiento;
-            existingUser.DepartamentoNacimiento = usuario.DepartamentoNacimiento;
-            existingUser.MunicipioNacimiento = usuario.MunicipioNacimiento;
-            existingUser.DireccionDomicilio = usuario.DireccionDomicilio;
-            existingUser.PaisDomicilio = usuario.PaisDomicilio;
-            existingUser.DepartamentoDomicilio = usuario.DepartamentoDomicilio;
-            existingUser.MunicipioDomicilio = usuario.MunicipioDomicilio;
-            existingUser.EmailPersonal = usuario.EmailPersonal;
-            existingUser.EmailInstitucional = usuario.EmailInstitucional;
-            existingUser.TelefonoCelular = usuario.TelefonoCelular;
-            existingUser.TelefonoFijo = usuario.TelefonoFijo;
-            existingUser.ContratoEmpleado = usuario.ContratoEmpleado;
-            existingUser.Salario = usuario.Salario;
-            existingUser.CargoEmpleado = usuario.CargoEmpleado;
 
-            // Manejo de la contraseña
-            if (!string.IsNullOrEmpty(password))
-            {
-                var passwordResult = await passwordValidator.ValidateAsync(userManager, existingUser, password);
+        //        IdentityResult resultado = await userManager.UpdateAsync(usuario);
 
-                if (passwordResult.Succeeded)
-                {
-                    existingUser.PasswordHash = passwordHasher.HashPassword(existingUser, password);
-                }
-                else
-                {
-                    foreach (var error in passwordResult.Errors)
-                    {
-                        ModelState.AddModelError("", error.Description);
-                    }
+        //        if (resultado.Succeeded)
+        //            return RedirectToAction("Index");
+        //        else
+        //            ModelState.AddModelError("", "No se ha podido actualizar el registro");
 
-                    return View("Edit", usuario);
-                }
-            }
-
-            var updateResult = await userManager.UpdateAsync(existingUser);
-
-            if (updateResult.Succeeded)
-            {
-                return RedirectToAction("Index");
-            }
-            else
-            {
-                foreach (var error in updateResult.Errors)
-                {
-                    ModelState.AddModelError("", error.Description);
-                }
-
-                return View("Edit", usuario);
-            }
-        }
+        //    }
+        //    return View(usuario);
+        //}
 
 
         [HttpPost]

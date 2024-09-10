@@ -47,6 +47,7 @@ namespace Identidad.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Administración")]
         public async Task<IActionResult> Delete(string id)
         {
             IdentityRole role = await _roleManager.FindByIdAsync(id);
@@ -89,6 +90,7 @@ namespace Identidad.Controllers
 
         // Metodo funcional para agregar o elimnar usuarios de role identity
         [HttpPost]
+        [Authorize(Roles = "Administración")]
         public async Task<IActionResult> Update(RoleModificar modelo)
         {
             try
