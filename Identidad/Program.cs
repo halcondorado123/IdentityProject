@@ -1,5 +1,7 @@
 using Identidad.IdentityPolicies;
 using Identidad.Models;
+using Identidad.PoliticaPersonalizada;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -36,13 +38,48 @@ builder.Services.AddTransient<IPasswordValidator<AppUsuario>, PoliticaPassPerson
 builder.Services.AddTransient<IUserValidator<AppUsuario>, PoliticaUsuarioEmailPersonalizada>();
 
 // Ruta de autenticacion - Si se cambia debe hacerse manualmente
-builder.Services.ConfigureApplicationCookie(options => {
+builder.Services.ConfigureApplicationCookie(options =>
+{
     options.Cookie.Name = ".AspNetCore.identity.Application";
     // Se almacena durante 20 minutos en el navegador
     options.ExpireTimeSpan = TimeSpan.FromMinutes(20);
     options.SlidingExpiration = true;
 });
-    
+
+
+// Se establecen dos politicas de acuerdo a los Claims
+// Politica 01
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("Segundo Email", policy =>
+    {
+        policy.RequireRole("Administración");
+        policy.RequireClaim("segundocorreo", "prueba10_jose@prueba.com");       // Si en el claim no aparece de esta manera no generara autorizacion de ingreso
+    });
+});
+
+
+builder.Services.AddTransient<IAuthorizationHandler, ControladorPermitirUsuarios>();
+builder.Services.AddTransient<IAuthorizationHandler, PermitirControladorPrivado>();
+
+// Politica 02
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("PermitirUsuarios", policy =>
+    {
+        policy.AddRequirements(new PoliticaPermisosUsuario("espana"));
+    });
+});
+
+
+// Politica 03
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("AccesoPrivado", policy =>
+    {
+        policy.AddRequirements(new PoliticaPermitirPrivado());
+    });
+});
 
 
 var app = builder.Build();

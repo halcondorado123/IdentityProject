@@ -9,17 +9,20 @@ namespace Identidad.Controllers
 {
     public class ClaimsController : Controller
     {
-        [Authorize]
+        //[Authorize]
+        // [Authorize(Policy = "Segundo Email")]
         public ViewResult Index()
         {
             return View(User?.Claims);
         }
 
         private readonly UserManager<AppUsuario> userManager;
+        private IAuthorizationService authService;
 
-        public ClaimsController(UserManager<AppUsuario> userManager)
+        public ClaimsController(UserManager<AppUsuario> userManager, IAuthorizationService authService)
         {
             this.userManager = userManager;
+            this.authService = authService;
         }
 
 
@@ -97,6 +100,35 @@ namespace Identidad.Controllers
             }
 
             return View();
+        }
+
+        // Nos devuleve la vista Index, nos pasa aquellos usuarios que tengan un tipo de reclamos(Claims) - En el ejemplo aplica rol Administrador, que tengan un ...
+        // ... reclamo segundo correo desde Program.cs
+        // [Authorize(Policy = "Segundo Email")]
+        public ViewResult Proyecto()
+        {
+            return View("Index", User?.Claims);
+        }
+
+
+        [Authorize(Policy = "PermitirUsuarios")]
+        public ViewResult SubirArchivos()
+        {
+            return View("Index", User?.Claims);
+        }
+
+        [Authorize(Policy = "AccesoPrivado")]
+        public async Task<IActionResult> AccesoPrivado()
+        {
+            string[] UsuariosPermitidos = { "espana", "jose" };
+            AuthorizationResult resultado = await authService.AuthorizeAsync(User, UsuariosPermitidos, "AccesoPrivado");
+
+            if (resultado.Succeeded)
+                return View("Index", User?.Claims);
+            else
+            {
+                return Content("Ha sucedido un error en el acceso a este recurso");
+            }
         }
 
     }
