@@ -38,7 +38,7 @@ namespace Identidad.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View(login);
+                return Json(new { success = false, message = "Datos de formulario no válidos." });
             }
 
             try
@@ -54,31 +54,28 @@ namespace Identidad.Controllers
 
                     if (resultado.Succeeded)
                     {
-                        return Redirect(login.ReturnUrl ?? "/");
+                        // Aquí, en lugar de hacer un Redirect, devolvemos un JSON con la URL a la que redirigir
+                        return Json(new { success = true, redirectUrl = login.ReturnUrl ?? "/" });
                     }
                     else
                     {
-                        ModelState.AddModelError("", "Credenciales incorrectas. Por favor, inténtelo de nuevo.");
+                        return Json(new { success = false, message = "El correo electrónico o la contraseña no coinciden. Asegúrese de ingresar los datos correctos." });
                     }
                 }
                 else
                 {
-                    ModelState.AddModelError("", "No se encontró un usuario con este correo electrónico.");
+                    return Json(new { success = false, message = "No se encontró un usuario con este correo electrónico." });
                 }
             }
             catch (Exception ex)
             {
-                // Log de la excepción (puedes usar un servicio de logging aquí)
-                // Ejemplo: _logger.LogError(ex, "Error en el inicio de sesión");
-
-                ModelState.AddModelError("", "Se ha producido un error inesperado: " + ex.Message);
+                // Log de la excepción
+                return Json(new { success = false, message = "Se ha producido un error inesperado: " + ex.Message });
             }
-
-            return View(login);
         }
-    
-    // Cierre de sesión
-    public async Task<IActionResult> Logout()
+
+        // Cierre de sesión
+        public async Task<IActionResult> Logout()
         {
 
             await signInManager.SignOutAsync();

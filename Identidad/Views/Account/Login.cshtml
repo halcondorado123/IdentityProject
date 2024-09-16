@@ -4,130 +4,246 @@
     Layout = "_PartialLayout";
 }
 
+@{
+    ViewData["Title"] = "Login";
+}
+
 <style>
+    /* CLASES PARA DIVIDIR COLUMNAS */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box; /* Asegura que el tamaño incluye bordes y padding */
+    }
+
+    html, body {
+        background: #000000;
+        margin: 0; /* Asegura que no haya márgenes en el cuerpo */
+        padding: 0; /* Asegura que no haya relleno en el cuerpo */
+        width: 100%;
+        height: 100%;
+        overflow: hidden; /* Elimina el scroll */
+    }
+
+    .container {
+        margin: 0; /* Centra el contenedor horizontalmente */
+        padding: 0;
+        height: 100vh; /* Altura completa de la pantalla */
+        width: 100vw; /* Ancho completo de la pantalla */
+        max-width: 1800px; /* Ancho máximo del contenedor */
+        display: flex; /* Habilita Flexbox */
+        background: #fff;
+    }
+
+    .column {
+        margin: 0;
+        padding: 0; /* Elimina el relleno de las columnas */
+        flex: 1; /* Distribuye el espacio equitativamente entre columnas */
+        display: flex; /* Utiliza Flexbox en cada columna */
+        align-items: center; /* Centra verticalmente el contenido */
+        justify-content: center; /* Centra horizontalmente el contenido */
+        overflow: hidden; /* Asegura que el contenido no cause scroll */
+    }
+
+    /* Card para inicio de sesión */
     .floating-form {
-        position: fixed; /* Fija el formulario en la pantalla */
-        top: 50%; /* Coloca el formulario en el centro verticalmente */
-        left: 50%; /* Coloca el formulario en el centro horizontalmente */
-        transform: translate(-50%, 100%); /* Ajusta la posición para ocultar el formulario abajo de la vista */
-        width: 500px; /* Ancho del formulario flotante */
-        display: none; /* Inicialmente oculto */
-        z-index: 1050; /* Asegura que esté encima de otros elementos */
-        transition: transform 0.5s ease; /* Transición suave */
+        height: 100%;
+        width: 100%; /* Ancho completo del contenedor del formulario */
+        padding: 20px; /* Espacio interior para el formulario */
+        max-width: 580px; /* Ancho máximo del formulario */
+        max-height: 600px;
+        border: none;
+        background-color: transparent;
     }
 
-    .show {
-        display: block; /* Muestra el formulario */
-        transform: translate(-50%, -50%); /* Mueve el formulario al centro */
+    .form-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* Centra horizontalmente el contenido */
+        justify-content: center; /* Centra verticalmente el contenido */
+        width: 100%; /* Asegura que el formulario ocupe todo el ancho disponible */
     }
 
-    .hide {
-        transform: translate(-50%, 100%); /* Mueve el formulario hacia abajo cuando se oculta */
+    .form-group {
+        width: 100%; /* Asegura que el grupo de formulario ocupe todo el ancho disponible */
+        text-align: left; /* Centra el texto y los campos dentro del grupo de formulario */
+        margin-bottom: 40px; /* Espacio inferior entre campos de formulario */
+        max-width: 380px;
     }
 
-    .card-header {
-        position: relative;
-    }
 
-    .close-btn {
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        cursor: pointer;
-        font-size: 24px; /* Tamaño del ícono de cerrar */
+    .form-control {
+        max-width: 100%; /* Ajusta el ancho máximo del campo de entrada */
+        border: 2px solid #ddd; /* Borde gris claro */
+        border-radius: 10px; /* Bordes redondeados */
+        box-shadow: 1px 1px #000000;
+        padding: 10px; /* Espaciado interno */
+        transition: all 0.3s ease; /* Transición suave */
     }
 
     .button-group {
-        display: flex; /* Utiliza Flexbox para alinear los botones en una fila */
-        justify-content: center; /* Centra los botones horizontalmente */
-        margin-top: 20px; /* Espacio superior para separar los botones del contenido del formulario */
+        width: 100%; /* Asegura que el grupo de botones ocupe todo el ancho disponible */
+        text-align: center; /* Centra los botones dentro del grupo de botones */
     }
 
-        .button-group .btn {
-            margin: 0 5px; /* Espacio horizontal entre los botones */
+    .form-label {
+    flex: 0 0 150px; /* Ancho fijo para el label */
+    margin-right: 15px; /* Espacio entre el label y el input */
+    text-align: right; /* Alinea el texto del label a la derecha */
+    font-weight: bold; /* Opcional: hace que el texto del label sea más grueso */
+}
+
+    /* Efecto de hover en los inputs */
+    .form-control:hover,
+    .form-control:focus {
+        border-color: #007bff; /* Borde azul al pasar el ratón o al enfocarse */
+        box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Sombra azul al pasar el ratón o al enfocarse */
+        background-color: #f1f1f1; /* Fondo más claro al pasar el ratón o al enfocarse */
+        outline: none; /* Elimina el contorno predeterminado del navegador */
+    }
+
+    /* Estilo específico para el estado de enfoque */
+    .form-control:focus {
+        border-color: #0056b3; /* Borde más oscuro cuando está enfocado */
+        box-shadow: 0 0 8px rgba(0, 86, 179, 0.5); /* Sombra más pronunciada cuando está enfocado */
+    }
+
+    /* Estilos boton submit*/
+    .btn-custom {
+        background-color: #28A745; /* Color Rosa Fucsia */
+        border: none; /* Elimina el borde si es necesario */
+        color: white; /* Color del texto */
+        font-size: 16px; /* Tamaño del texto */
+        padding: 10px 20px; /* Espacio interior */
+        border-radius: 5px; /* Bordes redondeados */
+        cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+        transition: background-color 0.3s ease; /* Transición suave para el hover */
+        box-shadow: 1px 1px #000000;
+    }
+
+        .btn-custom:hover {
+            background-color: #1e7e34; /* Un tono más oscuro para el hover */
         }
 
 </style>
 
 
 
-<h1 class="bg-info text-white">Identity Project</h1>
-
-<div class="container mt-5">
-    <button id="toggleFormButton" class="btn btn-primary">Mostrar Formulario</button>
-</div>
-<div id="floatingForm" class="floating-form hide card text-center">
-    <div class="card-header">
-        Iniciar sesión
-        <span id="closeFormButton" class="close-btn">&times;</span>
+<div class="container">
+    <div class="column column-1" style="background-image: url('/img/magicpattern-grid-pattern-1726497834269.png'); background-size: cover; background-position: center;">
+       
     </div>
-    <img src="/img/free-user-icon-295-thumb.png" alt="Ícono de usuario gratuito" class="d-block mx-auto my-4" style="border-radius:50%; border: 2px solid #c2cde8;" width="150" height="150" />
-    <form asp-action="Login" method="post">
-        <input type="hidden" asp-for="ReturnUrl" />
-        <div class="form-group">
-            <label asp-for="Email"></label>
-            <input asp-for="Email" class="form-control w-75 mx-auto" placeholder="Ingresa tu email" />
-        </div>
-        <div class="form-group">
-            <label asp-for="Password"></label>
-            <input asp-for="Password" class="form-control w-75 mx-auto" placeholder="Ingresa tu contraseña" />
-        </div>
-        <div>
-            <div class="text-danger" asp-validation-summary="All" style="margin: 15px auto;"></div>
-        </div>
-        <div class="button-group">
-            <button class="btn btn-primary" type="submit">Log In</button>
-            <button type="button" id="closeFormButton" class="btn btn-secondary">Cerrar</button>
-        </div>
-    </form>
-</div>
-<!-- Contenedor del formulario flotante -->
 
+    <div class="column column-2" style="background-image: url('/img/whtitwo_magicpattern-grid-pattern-1726502147348.png'); background-size: cover; background-position: center;">
+        <div id="floatingForm" class="floating-form card text-center">
+            <img src="/img/istockphoto-845329690-612x612.jpg" alt="Ícono de usuario gratuito" class="d-block mx-auto my-4" style="border-radius:50%; border: 2px solid #c2cde8;" width="150" height="150" />
+            <form asp-action="Login" method="post" class="form-container">
+                <input type="hidden" asp-for="ReturnUrl" />
+                <div class="form-group">
+                    <label asp-for="Email"></label>
+                    <input asp-for="Email" class="form-control" placeholder="Ingresa tu email" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="Password"></label>
+                    <input asp-for="Password" class="form-control" placeholder="Ingresa tu contraseña" />
+                </div>
+                <div>
+                    <div class="text-danger" asp-validation-summary="All" style="margin: 15px auto;"></div>
+                </div>
+                <div class="button-group">
+                    <button class="btn btn-custom" type="submit">Log In</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
 
 <script>
-    document.getElementById('toggleFormButton').addEventListener('click', function () {
-        var form = document.getElementById('floatingForm');
-        form.classList.remove('hide');
-        form.classList.add('show');
-    });
-
     document.addEventListener('DOMContentLoaded', function () {
-        // Mostrar el formulario flotante
-        document.getElementById('toggleFormButton').addEventListener('click', function () {
-            document.getElementById('floatingForm').classList.add('show');
-        });
-
-        // Cerrar el formulario flotante al hacer clic en la X o el botón Cerrar
-        document.querySelectorAll('#closeFormButton').forEach(function (button) {
-            button.addEventListener('click', function () {
-                document.getElementById('floatingForm').classList.remove('show');
-            });
-        });
-    });
-
-    // Cerrar el formulario flotante al hacer clic en la X o el botón Cerrar
-    document.querySelectorAll('#closeFormButton').forEach(function (button) {
-        button.addEventListener('click', function () {
-            document.getElementById('floatingForm').classList.remove('show');
-        });
-    });
-
-    // Mostrar SweetAlert2 en caso de errores de validación
-    const form = document.getElementById('loginForm');
-    form.addEventListener('submit', function (event) {
-        const validationSummary = document.getElementById('validationSummary').innerHTML;
-
-        if (validationSummary.trim() !== '') {
-            // Previene el envío del formulario si hay errores
+        const form = document.querySelector('form');
+        form.addEventListener('submit', async function (event) {
             event.preventDefault();
 
-            // Mostrar errores en SweetAlert2
-            Swal.fire({
-                icon: 'error',
-                title: 'Errores de Validación',
-                html: `<ul>${validationSummary}</ul>`,
-                confirmButtonText: 'Cerrar'
-            });
-        }
+            // Obtener los valores de los campos de correo y contraseña
+            const email = form.querySelector('input[name="Email"]').value.trim();
+            const password = form.querySelector('input[name="Password"]').value.trim();
+
+            // Validar que los campos no estén vacíos
+            if (!email && !password) {
+                Swal.fire({
+                    title: '¡Atención!',
+                    text: 'Asegúrese de ingresar la información solicitada.',
+                    icon: 'warning',
+                    confirmButtonText: 'Aceptar'
+                });
+                return; // Detener el proceso si ambos campos están vacíos
+            }
+
+            if (!email) {
+                Swal.fire({
+                    title: '¡Atención!',
+                    text: 'Asegúrese de ingresar su correo electrónico.',
+                    icon: 'warning',
+                    confirmButtonText: 'Aceptar'
+                });
+                return; // Detener el proceso si el correo está vacío
+            }
+
+            if (!password) {
+                Swal.fire({
+                    title: '¡Atención!',
+                    text: 'Asegúrese de ingresar su constraseña.',
+                    icon: 'warning',
+                    confirmButtonText: 'Aceptar'
+                });
+                return; // Detener el proceso si la contraseña está vacía
+            }
+
+            // Si los campos están completos, continuar con la solicitud
+            const formData = new FormData(form); // Crea FormData a partir del formulario
+
+            try {
+                const response = await fetch(form.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]').value
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+
+                const text = await response.text(); // Lee la respuesta como texto
+                console.log(text); // Muestra el texto en la consola
+
+                const data = JSON.parse(text); // Intenta convertir el texto a JSON
+
+                if (data.success) {
+                    if (data.redirectUrl) {
+                        window.location.href = data.redirectUrl; // Redirige a la URL especificada en la respuesta JSON
+                    }
+                } else {
+                    Swal.fire({
+                        title: 'Error',
+                        text: data.message,
+                        icon: 'error',
+                        confirmButtonText: 'Aceptar'
+                    });
+                }
+            } catch (error) {
+                Swal.fire({
+                    title: 'Error',
+                    text: 'Se ha producido un error en la solicitud.',
+                    icon: 'error',
+                    confirmButtonText: 'Aceptar'
+                });
+                console.error('Error:', error);
+            }
+        });
     });
 </script>
