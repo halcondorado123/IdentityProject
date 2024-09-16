@@ -26,251 +26,213 @@
         border-radius: 8px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
+
+    .form-row-custom {
+        margin-bottom: 1rem; /* Espacio entre las filas personalizadas */
+    }
 </style>
 
-<div class="content-container text-center">
-    <h1 class="bg-info text-white">Crear Usuario</h1>
-    <a asp-action="Index" class="btn btn-secondary mt-3">Atrás</a>
-    <div asp-validation-summary="All" class="text-danger mt-3"></div>
-
-    <form method="post" class="mt-4">
-        <div class="form-group">
-            <label asp-for="NombreUsuario" class="form-label"></label>
-            <input asp-for="NombreUsuario" class="form-control" />
-            <span asp-validation-for="NombreUsuario" class="text-danger"></span>
+<div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="bg-info text-white">Crear Usuario</h1>
+                <a href="/Index" class="btn btn-secondary mt-3">Atrás</a>
+                <div class="text-danger mt-3"></div>
+            </div>
         </div>
+            <form method="post">
+                <!-- Fila 1 -->
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label for="NombreUsuario">Nombre de Usuario</label>
+                        <input type="text" id="NombreUsuario" class="form-control" />
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="Nombres">Nombres</label>
+                        <input type="text" id="Nombres" class="form-control" />
+                    </div>
+                <div class="form-group col-md-6">
+                    <label for="Apellidos">Apellidos</label>
+                    <input type="text" id="Apellidos" class="form-control" />
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="EmailCorporativo">Email Corporativo</label>
+                    <input type="email" id="EmailCorporativo" class="form-control" />
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="Password">Contraseña</label>
+                    <input type="password" id="Password" class="form-control" />
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="TipoDocumento">Tipo de Documento</label>
+                    <select id="TipoDocumento" class="form-control">
+                        <option value="">Selecciona un documento</option>
+                        <option value="1">Cédula</option>
+                        <option value="2">Cédula de extranjería</option>
+                        <option value="3">Pasaporte</option>
+                    </select>
+                </div>
+                <div class=" col-md-6">
+                    <label for="NumeroDocumento">Número de Documento</label>
+                    <input type="number" id="NumeroDocumento" class="form-control" />
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="FechaNacimiento">Fecha de Nacimiento</label>
+                    <input type="date" id="FechaNacimiento" class="form-control" />
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="NumeroDocumento">Número de Documento</label>
+                    <input type="number" id="NumeroDocumento" class="form-control" />
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="FechaNacimiento">Fecha de Nacimiento</label>
+                    <input type="date" id="FechaNacimiento" class="form-control" />
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="Edad">Edad</label>
+                    <input type="number" id="Edad" class="form-control" />
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="PaisNacimiento">País de Nacimiento</label>
+                    <select id="PaisNacimiento" class="form-control">
+                        <option value="">Selecciona un país de nacimiento</option>
+                        <option value="CO">Colombia</option>
+                        <option value="AR">Argentina</option>
+                        <option value="BR">Brasil</option>
+                        <option value="CL">Chile</option>
+                        <option value="PE">Perú</option>
+                        <option value="VE">Venezuela</option>
+                        <option value="MX">México</option>
+                        <option value="EC">Ecuador</option>
+                        <option value="UY">Uruguay</option>
+                        <option value="PY">Paraguay</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="DepartamentoNacimiento">Departamento de Nacimiento</label>
+                    <select id="DepartamentoNacimiento" class="form-control">
+                        <option value="">Selecciona un departamento de nacimiento</option>
+                        <option value="01">Amazonas</option>
+                        <option value="05">Antioquia</option>
+                        <option value="08">Atlántico</option>
+                        <option value="11">Bogotá, D.C.</option>
+                        <option value="13">Bolívar</option>
+                        <option value="15">Boyacá</option>
+                        <option value="17">Caldas</option>
+                        <option value="18">Caquetá</option>
+                        <option value="19">Casanare</option>
+                        <option value="20">Cauca</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="MunicipioNacimiento">Municipio de Nacimiento</label>
+                    <select id="MunicipioNacimiento" class="form-control">
+                        <option value="">Selecciona un municipio de nacimiento</option>
+                        <option value="001">Leticia</option>
+                        <option value="002">Puerto Nariño</option>
+                        <option value="01001">Medellín</option>
+                        <option value="01002">Envigado</option>
+                        <option value="08001">Barranquilla</option>
+                        <option value="08078">Soledad</option>
+                        <option value="11001">Bogotá</option>
+                        <option value="13052">Cartagena</option>
+                        <option value="15001">Tunja</option>
+                        <option value="17001">Manizales</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="DireccionDomicilio">Dirección de Domicilio</label>
+                    <input type="text" id="DireccionDomicilio" class="form-control" />
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="PaisDomicilio">País de Domicilio</label>
+                    <select id="PaisDomicilio" class="form-control">
+                        <option value="">Selecciona un país de domicilio</option>
+                        <option value="CO">Colombia</option>
+                        <option value="AR">Argentina</option>
+                        <option value="BR">Brasil</option>
+                        <option value="CL">Chile</option>
+                        <option value="PE">Perú</option>
+                        <option value="VE">Venezuela</option>
+                        <option value="MX">México</option>
+                        <option value="EC">Ecuador</option>
+                        <option value="UY">Uruguay</option>
+                        <option value="PY">Paraguay</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="DepartamentoDomicilio">Departamento de Domicilio</label>
+                    <select id="DepartamentoDomicilio" class="form-control">
+                        <option value="">Selecciona un departamento de domicilio</option>
+                        <option value="01">Amazonas</option>
+                        <option value="05">Antioquia</option>
+                        <option value="08">Atlántico</option>
+                        <option value="11">Bogotá, D.C.</option>
+                        <option value="13">Bolívar</option>
+                        <option value="15">Boyacá</option>
+                        <option value="17">Caldas</option>
+                        <option value="18">Caquetá</option>
+                        <option value="19">Casanare</option>
+                        <option value="20">Cauca</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="MunicipioDomicilio">Municipio de Domicilio</label>
+                    <select id="MunicipioDomicilio" class="form-control">
+                        <option value="">Selecciona un municipio de domicilio</option>
+                        <option value="001">Leticia</option>
+                        <option value="002">Puerto Nariño</option>
+                        <option value="01001">Medellín</option>
+                        <option value="01002">Envigado</option>
+                        <option value="08001">Barranquilla</option>
+                        <option value="08078">Soledad</option>
+                        <option value="11001">Bogotá</option>
+                        <option value="13052">Cartagena</option>
+                        <option value="15001">Tunja</option>
+                        <option value="17001">Manizales</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="Telefono">Teléfono</label>
+                    <input type="tel" id="Telefono" class="form-control" />
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="Celular">Celular</label>
+                    <input type="tel" id="Celular" class="form-control" />
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="EstadoCivil">Estado Civil</label>
+                    <select id="EstadoCivil" class="form-control">
+                        <option value="">Selecciona un estado civil</option>
+                        <option value="soltero">Soltero</option>
+                        <option value="casado">Casado</option>
+                        <option value="divorciado">Divorciado</option>
+                        <option value="viudo">Viudo</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="GrupoSanguineo">Grupo Sanguíneo</label>
+                    <select id="GrupoSanguineo" class="form-control">
+                        <option value="">Selecciona un grupo sanguíneo</option>
+                        <option value="A+">A+</option>
+                        <option value="A-">A-</option>
+                        <option value="B+">B+</option>
+                        <option value="B-">B-</option>
+                        <option value="O+">O+</option>
+                        <option value="O-">O-</option>
+                        <option value="AB+">AB+</option>
+                        <option value="AB-">AB-</option>
+                    </select>
+                </div>
 
-        <div class="form-group mt-3">
-            <label asp-for="Nombres" class="form-label"></label>
-            <input asp-for="Nombres" class="form-control" />
-            <span asp-validation-for="Nombres" class="text-danger"></span>
-        </div>
 
-        <div class="form-group mt-3">
-            <label asp-for="Apellidos" class="form-label"></label>
-            <input asp-for="Apellidos" class="form-control" />
-            <span asp-validation-for="Apellidos" class="text-danger"></span>
-        </div>
+                </div>
 
-        <div class="form-group mt-3">
-            <label asp-for="EmailCorporativo" class="form-label"></label>
-            <input asp-for="EmailCorporativo" class="form-control" />
-            <span asp-validation-for="EmailCorporativo" class="text-danger"></span>
-        </div>
+              
 
-        <div class="form-group mt-3">
-            <label asp-for="Password" class="form-label"></label>
-            <input asp-for="Password" type="password" class="form-control" />
-            <span asp-validation-for="Password" class="text-danger"></span>
-        </div>
-
-        <div class="form-group mt-3">
-            <label asp-for="TipoDocumento" class="form-label"></label>
-            <select asp-for="TipoDocumento" class="form-control">
-                <option value="">Selecciona un documento</option>
-                <option value="1">Cédula</option>
-                <option value="2">Cédula de extranjería</option>
-                <option value="3">Pasaporte</option>
-            </select>
-            <span asp-validation-for="TipoDocumento" class="text-danger"></span>
-        </div>
-
-        <div class="form-group mt-3">
-            <label asp-for="NumeroDocumento" class="form-label"></label>
-            <input asp-for="NumeroDocumento" type="number" class="form-control" />
-            <span asp-validation-for="NumeroDocumento" class="text-danger"></span>
-        </div>
-
-        <!-- Selección del Documento -->
-        <div class="form-group mt-3">
-            <label asp-for="FechaNacimiento" class="form-label"></label>
-            <input asp-for="FechaNacimiento" type="date" class="form-control" />
-            <span asp-validation-for="FechaNacimiento" class="text-danger"></span>
-        </div>
-
-        <div class="form-group mt-3">
-            <label asp-for="Edad" class="form-label"></label>
-            <input asp-for="Edad" type="number" class="form-control" />
-            <span asp-validation-for="Edad" class="text-danger"></span>
-        </div>
-
-        <!-- Selección de País de Nacimiento -->
-        <div class="form-group mt-3">
-            <label asp-for="PaisNacimiento" class="form-label"></label>
-            <select asp-for="PaisNacimiento" class="form-control">
-                <option value="">Selecciona un país de nacimiento</option>
-                <option value="CO">Colombia</option>
-                <option value="AR">Argentina</option>
-                <option value="BR">Brasil</option>
-                <option value="CL">Chile</option>
-                <option value="PE">Perú</option>
-                <option value="VE">Venezuela</option>
-                <option value="MX">México</option>
-                <option value="EC">Ecuador</option>
-                <option value="UY">Uruguay</option>
-                <option value="PY">Paraguay</option>
-            </select>
-            <span asp-validation-for="PaisNacimiento" class="text-danger"></span>
-        </div>
-
-        <!-- Selección de Departamento de Nacimiento -->
-        <div class="form-group mt-3">
-            <label asp-for="DepartamentoNacimiento" class="form-label"></label>
-            <select asp-for="DepartamentoNacimiento" class="form-control">
-                <option value="">Selecciona un departamento de nacimiento</option>
-                <option value="01">Amazonas</option>
-                <option value="05">Antioquia</option>
-                <option value="08">Atlántico</option>
-                <option value="11">Bogotá, D.C.</option>
-                <option value="13">Bolívar</option>
-                <option value="15">Boyacá</option>
-                <option value="17">Caldas</option>
-                <option value="18">Caquetá</option>
-                <option value="19">Casanare</option>
-                <option value="20">Cauca</option>
-            </select>
-            <span asp-validation-for="DepartamentoNacimiento" class="text-danger"></span>
-        </div>
-
-        <!-- Selección de Municipio de Nacimiento -->
-        <div class="form-group mt-3">
-            <label asp-for="MunicipioNacimiento" class="form-label"></label>
-            <select asp-for="MunicipioNacimiento" class="form-control">
-                <option value="">Selecciona un municipio de nacimiento</option>
-                <option value="001">Leticia</option>
-                <option value="002">Puerto Nariño</option>
-                <option value="01001">Medellín</option>
-                <option value="01002">Envigado</option>
-                <option value="08001">Barranquilla</option>
-                <option value="08078">Soledad</option>
-                <option value="11001">Bogotá</option>
-                <option value="13052">Cartagena</option>
-                <option value="15001">Tunja</option>
-                <option value="17001">Manizales</option>
-            </select>
-            <span asp-validation-for="MunicipioNacimiento" class="text-danger"></span>
-        </div>
-
-        <!-- Dirección de domicilio -->
-        <div class="form-group mt-3">
-            <label asp-for="DireccionDomicilio" class="form-label"></label>
-            <input asp-for="DireccionDomicilio" class="form-control" />
-            <span asp-validation-for="DireccionDomicilio" class="text-danger"></span>
-        </div>
-
-        <!-- Selección de País de Domicilio -->
-        <div class="form-group mt-3">
-            <label asp-for="PaisDomicilio" class="form-label"></label>
-            <select asp-for="PaisDomicilio" class="form-control">
-                <option value="">Selecciona un país de domicilio</option>
-                <option value="CO">Colombia</option>
-                <option value="AR">Argentina</option>
-                <option value="BR">Brasil</option>
-                <option value="CL">Chile</option>
-                <option value="PE">Perú</option>
-                <option value="VE">Venezuela</option>
-                <option value="MX">México</option>
-                <option value="EC">Ecuador</option>
-                <option value="UY">Uruguay</option>
-                <option value="PY">Paraguay</option>
-            </select>
-            <span asp-validation-for="PaisDomicilio" class="text-danger"></span>
-        </div>
-
-        <!-- Selección de Departamento de Domicilio -->
-        <div class="form-group mt-3">
-            <label asp-for="DepartamentoDomicilio" class="form-label"></label>
-            <select asp-for="DepartamentoDomicilio" class="form-control">
-                <option value="">Selecciona un departamento de domicilio</option>
-                <option value="01">Amazonas</option>
-                <option value="05">Antioquia</option>
-                <option value="08">Atlántico</option>
-                <option value="11">Bogotá, D.C.</option>
-                <option value="13">Bolívar</option>
-                <option value="15">Boyacá</option>
-                <option value="17">Caldas</option>
-                <option value="18">Caquetá</option>
-                <option value="19">Casanare</option>
-                <option value="20">Cauca</option>
-                <!-- Agrega más departamentos si es necesario -->
-            </select>
-            <span asp-validation-for="DepartamentoDomicilio" class="text-danger"></span>
-        </div>
-
-        <!-- Selección de Municipio de Domicilio -->
-        <div class="form-group mt-3">
-            <label asp-for="MunicipioDomicilio" class="form-label"></label>
-            <select asp-for="MunicipioDomicilio" class="form-control">
-                <option value="">Selecciona un municipio de domicilio</option>
-                <option value="001">Leticia</option>
-                <option value="002">Puerto Nariño</option>
-                <option value="01001">Medellín</option>
-                <option value="01002">Envigado</option>
-                <option value="08001">Barranquilla</option>
-                <option value="08078">Soledad</option>
-                <option value="11001">Bogotá</option>
-                <option value="13052">Cartagena</option>
-                <option value="15001">Tunja</option>
-                <option value="17001">Manizales</option>
-                <!-- Agrega más municipios si es necesario -->
-            </select>
-            <span asp-validation-for="MunicipioDomicilio" class="text-danger"></span>
-        </div>
-
-        <div class="form-group mt-3">
-            <label asp-for="EmailPersonal" class="form-label"></label>
-            <input asp-for="EmailPersonal" class="form-control" />
-            <span asp-validation-for="EmailPersonal" class="text-danger"></span>
-        </div>
-
-@*         <div class="form-group mt-3">
-            <label asp-for="EmailInstitucional" class="form-label"></label>
-            <input asp-for="EmailInstitucional" class="form-control" />
-            <span asp-validation-for="EmailInstitucional" class="text-danger"></span>
-        </div> *@
-
-        <div class="form-group mt-3">
-            <label asp-for="TelefonoCelular" class="form-label"></label>
-            <input asp-for="TelefonoCelular" class="form-control" />
-            <span asp-validation-for="TelefonoCelular" class="text-danger"></span>
-        </div>
-
-        <div class="form-group mt-3">
-            <label asp-for="TelefonoFijo" class="form-label"></label>
-            <input asp-for="TelefonoFijo" class="form-control" />
-            <span asp-validation-for="TelefonoFijo" class="text-danger"></span>
-        </div>
-
-        <div class="form-group mt-3">
-            <label asp-for="ContratoEmpleado" class="form-label"></label>
-            <select asp-for="ContratoEmpleado" class="form-control">
-                <option value="">Selecciona un contrato</option>
-                <option value="1">Contrato a Término Indefinido</option>
-                <option value="2">Contrato a Término Fijo</option>
-                <option value="3">Contrato de Obra o Labor</option>
-                <option value="4">Contrato de Aprendizaje</option>
-                <option value="5">Contrato de Servicios</option>
-                <option value="6">Contrato Temporal</option>
-                <option value="7">Contrato de Trabajo por Horas</option>
-                <option value="8">Contrato de Empleo en Mínimo Vital</option>
-                <option value="9">Contrato de Trabajo en el Exterior</option>
-                <option value="10">Contrato de Trabajo en la Industria</option>
-            </select>
-            <span asp-validation-for="ContratoEmpleado" class="text-danger"></span>
-        </div>
-
-        <div class="form-group mt-3">
-            <label asp-for="Salario" class="form-label"></label>
-            <input asp-for="Salario" class="form-control" />
-            <span asp-validation-for="Salario" class="text-danger"></span>
-        </div>
-
-        <div class="form-group mt-3">
-            <label asp-for="CargoEmpleado" class="form-label"></label>
-            <input asp-for="CargoEmpleado" class="form-control" />
-            <span asp-validation-for="CargoEmpleado" class="text-danger"></span>
-        </div>
-
-        <button type="submit" class="btn btn-primary mt-3">Crear</button>
-    </form>
+                <button type="submit" class="btn btn-primary mt-3">Crear</button>
+            </form>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
