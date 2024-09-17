@@ -30,209 +30,341 @@
     .form-row-custom {
         margin-bottom: 1rem; /* Espacio entre las filas personalizadas */
     }
+
+
+    /* Eliminar las flechas del input number en Chrome, Safari, Edge, Opera */
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    /* Para Firefox */
+    input[type="number"] {
+        -moz-appearance: textfield;
+    }
+
 </style>
 
 <div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="bg-info text-white">Crear Usuario</h1>
+            <a asp-action="Index" class="btn btn-secondary">Atrás</a>
+            <div class="text-danger mt-3"></div>
+        </div>
+    </div>
+    <form method="post">
+        <!-- Fila 1 -->
         <div class="row">
-            <div class="col-md-12">
-                <h1 class="bg-info text-white">Crear Usuario</h1>
-                <a href="/Index" class="btn btn-secondary mt-3">Atrás</a>
-                <div class="text-danger mt-3"></div>
+            <h3 style="margin-top:20px">Datos de Identificación</h3>
+            <hr />
+
+            <!-- Primera columna -->
+            <div class="form-group col-md-4">
+                <label for="TipoDocumento">Tipo de Documento</label>
+                <select id="TipoDocumento" class="form-control">
+                    <option value="">Selecciona un documento</option>
+                    <option value="1">Cédula</option>
+                    <option value="2">Cédula de extranjería</option>
+                    <option value="3">Pasaporte</option>
+                </select>
+            </div>
+
+            <!-- Segunda columna -->
+            <div class="form-group col-md-4">
+                <label for="NumeroDocumento"> Número de documento
+                    <i class="fa-solid fa-circle-info" data-toggle="tooltip" data-placement="top" title="Agregar información"></i>
+                </label>
+
+                <input type="text" id="NumeroDocumento" class="form-control" autocomplete="off" />
+            </div>
+
+            <!-- Lugar de Expedición -->
+            <div class="form-group col-md-4">
+                <label for="LugarExpedicion">Lugar de Expedición</label>
+                <input type="text" id="LugarExpedicion" class="form-control" autocomplete="off" />
+            </div>
+
+            <div class="form-group col-md-6">
+                <label for="Nombres">Nombres</label>
+                <input type="text" id="Nombres" class="form-control" autocomplete="off" />
+            </div>
+
+            <div class="form-group col-md-6">
+                <label for="Apellidos">Apellidos</label>
+                <input type="text" id="Apellidos" class="form-control" autocomplete="off" />
+            </div>
+
+            <div class="form-group col-md-3">
+                <label for="FechaNacimiento">Fecha de Nacimiento</label>
+                <input type="date" id="FechaNacimiento" class="form-control" />
+            </div>
+
+            <div class="form-group col-md-3">
+                <label for="FechaExpedicion">Fecha de Expedición</label>
+                <input type="date" id="FechaExpedicion" class="form-control" />
+            </div>
+
+            <div class="form-group col-md-3">
+                <label for="FechaVencimiento">Fecha de Vencimiento</label>
+                <input type="date" id="FechaVencimiento" class="form-control" />
+            </div>
+
+            <div class="form-group col-md-3">
+                <label for="Edad">Edad</label>
+                <input type="number" id="Edad" class="form-control" disabled />
+            </div>
+
+            <h3 style="margin-top:20px">Datos Geográficos del Nacimiento</h3>
+            <hr />
+
+            <div class="form-group col-md-4">
+                <label for="PaisNacimiento">País de Nacimiento</label>
+                <select id="PaisNacimiento" class="form-control">
+                    <option value="">Selecciona un país de nacimiento</option>
+                    <option value="CO">Colombia</option>
+                    <option value="AR">Argentina</option>
+                    <option value="BR">Brasil</option>
+                    <option value="CL">Chile</option>
+                    <option value="PE">Perú</option>
+                    <option value="VE">Venezuela</option>
+                    <option value="MX">México</option>
+                    <option value="EC">Ecuador</option>
+                    <option value="UY">Uruguay</option>
+                    <option value="PY">Paraguay</option>
+                </select>
+            </div>
+            <div class="form-group col-md-4">
+                <label for="DepartamentoNacimiento">Departamento de Nacimiento</label>
+                <select id="DepartamentoNacimiento" class="form-control">
+                    <option value="">Selecciona un departamento de nacimiento</option>
+                    <option value="01">Amazonas</option>
+                    <option value="05">Antioquia</option>
+                    <option value="08">Atlántico</option>
+                    <option value="11">Bogotá, D.C.</option>
+                    <option value="13">Bolívar</option>
+                    <option value="15">Boyacá</option>
+                    <option value="17">Caldas</option>
+                    <option value="18">Caquetá</option>
+                    <option value="19">Casanare</option>
+                    <option value="20">Cauca</option>
+                </select>
+            </div>
+            <div class="form-group col-md-4">
+                <label for="MunicipioNacimiento">Municipio de Nacimiento</label>
+                <select id="MunicipioNacimiento" class="form-control">
+                    <option value="">Selecciona un municipio de nacimiento</option>
+                    <option value="001">Leticia</option>
+                    <option value="002">Puerto Nariño</option>
+                    <option value="01001">Medellín</option>
+                    <option value="01002">Envigado</option>
+                    <option value="08001">Barranquilla</option>
+                    <option value="08078">Soledad</option>
+                    <option value="11001">Bogotá</option>
+                    <option value="13052">Cartagena</option>
+                    <option value="15001">Tunja</option>
+                    <option value="17001">Manizales</option>
+                </select>
+            </div>
+
+            <h3 style="margin-top:20px">Información de Contacto</h3>
+            <hr />
+
+            <div class="form-group col-md-6">
+                <label for="DireccionDomicilio">Dirección de Domicilio</label>
+                <input type="text" id="DireccionDomicilio" class="form-control" autocomplete="off" />
+            </div>
+            <div class="form-group col-md-6">
+                <label for="PaisDomicilio">País de Domicilio</label>
+                <select id="PaisDomicilio" class="form-control">
+                    <option value="">Selecciona un país de domicilio</option>
+                    <option value="CO">Colombia</option>
+                    <option value="AR">Argentina</option>
+                    <option value="BR">Brasil</option>
+                    <option value="CL">Chile</option>
+                    <option value="PE">Perú</option>
+                    <option value="VE">Venezuela</option>
+                    <option value="MX">México</option>
+                    <option value="EC">Ecuador</option>
+                    <option value="UY">Uruguay</option>
+                    <option value="PY">Paraguay</option>
+                </select>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="DepartamentoDomicilio">Departamento de Domicilio</label>
+                <select id="DepartamentoDomicilio" class="form-control">
+                    <option value="">Selecciona un departamento de domicilio</option>
+                    <option value="01">Amazonas</option>
+                    <option value="05">Antioquia</option>
+                    <option value="08">Atlántico</option>
+                    <option value="11">Bogotá, D.C.</option>
+                    <option value="13">Bolívar</option>
+                    <option value="15">Boyacá</option>
+                    <option value="17">Caldas</option>
+                    <option value="18">Caquetá</option>
+                    <option value="19">Casanare</option>
+                    <option value="20">Cauca</option>
+                </select>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="MunicipioDomicilio">Municipio de Domicilio</label>
+                <select id="MunicipioDomicilio" class="form-control">
+                    <option value="">Selecciona un municipio de domicilio</option>
+                    <option value="001">Leticia</option>
+                    <option value="002">Puerto Nariño</option>
+                    <option value="01001">Medellín</option>
+                    <option value="01002">Envigado</option>
+                    <option value="08001">Barranquilla</option>
+                    <option value="08078">Soledad</option>
+                    <option value="11001">Bogotá</option>
+                    <option value="13052">Cartagena</option>
+                    <option value="15001">Tunja</option>
+                    <option value="17001">Manizales</option>
+                </select>
+            </div>
+
+            <div class="form-group col-md-12 text-center">
+                <button type="submit" class="btn btn-primary">Guardar</button>
             </div>
         </div>
-            <form method="post">
-                <!-- Fila 1 -->
-                <div class="row">
-                    <div class="form-group col-md-6">
-                        <label for="NombreUsuario">Nombre de Usuario</label>
-                        <input type="text" id="NombreUsuario" class="form-control" />
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label for="Nombres">Nombres</label>
-                        <input type="text" id="Nombres" class="form-control" />
-                    </div>
-                <div class="form-group col-md-6">
-                    <label for="Apellidos">Apellidos</label>
-                    <input type="text" id="Apellidos" class="form-control" />
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="EmailCorporativo">Email Corporativo</label>
-                    <input type="email" id="EmailCorporativo" class="form-control" />
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="Password">Contraseña</label>
-                    <input type="password" id="Password" class="form-control" />
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="TipoDocumento">Tipo de Documento</label>
-                    <select id="TipoDocumento" class="form-control">
-                        <option value="">Selecciona un documento</option>
-                        <option value="1">Cédula</option>
-                        <option value="2">Cédula de extranjería</option>
-                        <option value="3">Pasaporte</option>
-                    </select>
-                </div>
-                <div class=" col-md-6">
-                    <label for="NumeroDocumento">Número de Documento</label>
-                    <input type="number" id="NumeroDocumento" class="form-control" />
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="FechaNacimiento">Fecha de Nacimiento</label>
-                    <input type="date" id="FechaNacimiento" class="form-control" />
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="NumeroDocumento">Número de Documento</label>
-                    <input type="number" id="NumeroDocumento" class="form-control" />
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="FechaNacimiento">Fecha de Nacimiento</label>
-                    <input type="date" id="FechaNacimiento" class="form-control" />
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="Edad">Edad</label>
-                    <input type="number" id="Edad" class="form-control" />
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="PaisNacimiento">País de Nacimiento</label>
-                    <select id="PaisNacimiento" class="form-control">
-                        <option value="">Selecciona un país de nacimiento</option>
-                        <option value="CO">Colombia</option>
-                        <option value="AR">Argentina</option>
-                        <option value="BR">Brasil</option>
-                        <option value="CL">Chile</option>
-                        <option value="PE">Perú</option>
-                        <option value="VE">Venezuela</option>
-                        <option value="MX">México</option>
-                        <option value="EC">Ecuador</option>
-                        <option value="UY">Uruguay</option>
-                        <option value="PY">Paraguay</option>
-                    </select>
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="DepartamentoNacimiento">Departamento de Nacimiento</label>
-                    <select id="DepartamentoNacimiento" class="form-control">
-                        <option value="">Selecciona un departamento de nacimiento</option>
-                        <option value="01">Amazonas</option>
-                        <option value="05">Antioquia</option>
-                        <option value="08">Atlántico</option>
-                        <option value="11">Bogotá, D.C.</option>
-                        <option value="13">Bolívar</option>
-                        <option value="15">Boyacá</option>
-                        <option value="17">Caldas</option>
-                        <option value="18">Caquetá</option>
-                        <option value="19">Casanare</option>
-                        <option value="20">Cauca</option>
-                    </select>
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="MunicipioNacimiento">Municipio de Nacimiento</label>
-                    <select id="MunicipioNacimiento" class="form-control">
-                        <option value="">Selecciona un municipio de nacimiento</option>
-                        <option value="001">Leticia</option>
-                        <option value="002">Puerto Nariño</option>
-                        <option value="01001">Medellín</option>
-                        <option value="01002">Envigado</option>
-                        <option value="08001">Barranquilla</option>
-                        <option value="08078">Soledad</option>
-                        <option value="11001">Bogotá</option>
-                        <option value="13052">Cartagena</option>
-                        <option value="15001">Tunja</option>
-                        <option value="17001">Manizales</option>
-                    </select>
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="DireccionDomicilio">Dirección de Domicilio</label>
-                    <input type="text" id="DireccionDomicilio" class="form-control" />
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="PaisDomicilio">País de Domicilio</label>
-                    <select id="PaisDomicilio" class="form-control">
-                        <option value="">Selecciona un país de domicilio</option>
-                        <option value="CO">Colombia</option>
-                        <option value="AR">Argentina</option>
-                        <option value="BR">Brasil</option>
-                        <option value="CL">Chile</option>
-                        <option value="PE">Perú</option>
-                        <option value="VE">Venezuela</option>
-                        <option value="MX">México</option>
-                        <option value="EC">Ecuador</option>
-                        <option value="UY">Uruguay</option>
-                        <option value="PY">Paraguay</option>
-                    </select>
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="DepartamentoDomicilio">Departamento de Domicilio</label>
-                    <select id="DepartamentoDomicilio" class="form-control">
-                        <option value="">Selecciona un departamento de domicilio</option>
-                        <option value="01">Amazonas</option>
-                        <option value="05">Antioquia</option>
-                        <option value="08">Atlántico</option>
-                        <option value="11">Bogotá, D.C.</option>
-                        <option value="13">Bolívar</option>
-                        <option value="15">Boyacá</option>
-                        <option value="17">Caldas</option>
-                        <option value="18">Caquetá</option>
-                        <option value="19">Casanare</option>
-                        <option value="20">Cauca</option>
-                    </select>
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="MunicipioDomicilio">Municipio de Domicilio</label>
-                    <select id="MunicipioDomicilio" class="form-control">
-                        <option value="">Selecciona un municipio de domicilio</option>
-                        <option value="001">Leticia</option>
-                        <option value="002">Puerto Nariño</option>
-                        <option value="01001">Medellín</option>
-                        <option value="01002">Envigado</option>
-                        <option value="08001">Barranquilla</option>
-                        <option value="08078">Soledad</option>
-                        <option value="11001">Bogotá</option>
-                        <option value="13052">Cartagena</option>
-                        <option value="15001">Tunja</option>
-                        <option value="17001">Manizales</option>
-                    </select>
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="Telefono">Teléfono</label>
-                    <input type="tel" id="Telefono" class="form-control" />
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="Celular">Celular</label>
-                    <input type="tel" id="Celular" class="form-control" />
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="EstadoCivil">Estado Civil</label>
-                    <select id="EstadoCivil" class="form-control">
-                        <option value="">Selecciona un estado civil</option>
-                        <option value="soltero">Soltero</option>
-                        <option value="casado">Casado</option>
-                        <option value="divorciado">Divorciado</option>
-                        <option value="viudo">Viudo</option>
-                    </select>
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="GrupoSanguineo">Grupo Sanguíneo</label>
-                    <select id="GrupoSanguineo" class="form-control">
-                        <option value="">Selecciona un grupo sanguíneo</option>
-                        <option value="A+">A+</option>
-                        <option value="A-">A-</option>
-                        <option value="B+">B+</option>
-                        <option value="B-">B-</option>
-                        <option value="O+">O+</option>
-                        <option value="O-">O-</option>
-                        <option value="AB+">AB+</option>
-                        <option value="AB-">AB-</option>
-                    </select>
-                </div>
-
-
-                </div>
-
-              
-
-                <button type="submit" class="btn btn-primary mt-3">Crear</button>
-            </form>
+    </form>
 </div>
+
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://kit.fontawesome.com/9c9ff965bd.js" crossorigin="anonymous"></script>
+
+
+<!-- Tu HTML aquí -->
+
+<script>
+
+    // Inicializar el valor del campo con el valor almacenado en localStorage
+    $("#NumeroDocumento").val(localStorage.getItem("NumeroDocumento"));
+
+    // Manejador para el evento input
+    $("#NumeroDocumento").on("input", function (event) {
+        let value = $("#NumeroDocumento").val();
+        let tipoDocumento = $("#TipoDocumento").val();
+
+        if (tipoDocumento === "3") {
+            // Validación para Pasaporte (exactamente 3 letras seguidas de hasta 10 números)
+            const regex = /^[a-zA-Z]{3}[0-9]{0,10}$/;
+
+            if (!regex.test(value)) {
+                // Reemplazar cualquier carácter que no cumpla con la expresión regular
+                value = value.replace(/[^a-zA-Z0-9]/g, ''); // Primero quitar cualquier carácter que no sea letra o número
+                let letras = value.match(/[a-zA-Z]{0,3}/); // Obtener hasta las primeras 3 letras
+                letras = letras ? letras[0].toUpperCase() : ''; // Convertir las letras a mayúsculas
+                const numeros = value.replace(/[a-zA-Z]/g, ''); // Eliminar las letras para obtener los números
+                value = letras + numeros.slice(0, 10); // Recombinar las letras y los números, limitando a 10 números
+                $("#NumeroDocumento").val(value);
+            }
+        } else {
+            // Validación para Cédula y Cédula de extranjería (solo números, máximo 14 dígitos)
+            const regex = /^\d{0,14}$/;
+
+            if (!regex.test(value)) {
+                // Reemplazar cualquier carácter que no cumpla con la expresión regular
+                value = value.replace(/[^0-9]/g, ''); // Solo números permitidos
+                value = value.slice(0, 14); // Limitar a 14 dígitos
+                $("#NumeroDocumento").val(value);
+            }
+        }
+    });
+
+    document.addEventListener('DOMContentLoaded', function () {
+        // Obtén referencias a los elementos del formulario
+        var tipoDocumento = document.getElementById('TipoDocumento');
+        var numeroDocumento = document.getElementById('NumeroDocumento');
+        var ciudadExpedicion = document.getElementById('LugarExpedicion');
+        var nombres = document.getElementById('NumeroDocumento');
+        var ciudadExpedicion = document.getElementById('LugarExpedicion');
+
+
+        // Añade un listener para el evento 'change' en el campo TipoDocumento
+        tipoDocumento.addEventListener('change', function () {
+            // Borra el valor del campo NumeroDocumento cuando cambia el TipoDocumento
+            numeroDocumento.value = '';
+            ciudadExpedicion.value = '';
+        });
+    });
+
+    // Manejador para el evento keydown
+    $("#NumeroDocumento").on("keydown", function (event) {
+        let tipoDocumento = $("#TipoDocumento").val();
+
+        if (tipoDocumento === "3") {
+            // Evitar ingresar 0 al principio para Pasaporte
+            if (event.key === '0' && $(this).val().length === 0) {
+                event.preventDefault();
+            }
+        } else {
+            // Evitar ingresar 0 al principio para otros documentos
+            if (event.key === '0' && $(this).val().length === 0) {
+                event.preventDefault();
+            }
+        }
+    });
+
+    // VALIDACION PARA NOMBRE (Parametrizado a un máximo de 100 caracteres)
+    $("#Nombres").val(localStorage.getItem("Nombres"));
+    $("#Nombres").on("input", function (event) {
+        let value = $("#Nombres").val();
+        // Expresión regular que permite letras con acentos y caracteres especiales
+        const regex = /^[\p{L}\s]*$/u;
+
+        if (!regex.test(value)) {
+            value = value.replace(/[^\p{L}\s]/gu, ''); // Reemplazar caracteres no permitidos
+            $("#Nombres").val(value);
+        }
+
+        if (value.length > 100) {
+            value = value.slice(0, 100);
+            $("#Nombres").val(value);
+        }
+    });
+
+    // VALIDACION PARA APELLIDOS (Parametrizado a un máximo de 100 caracteres)
+    $("#Apellidos").val(localStorage.getItem("Apellidos"));
+    $("#Apellidos").on("input", function (event) {
+        let value = $("#Apellidos").val();
+        // Expresión regular que permite letras con acentos y caracteres especiales
+        const regex = /^[\p{L}\s]*$/u;
+
+        if (!regex.test(value)) {
+            value = value.replace(/[^\p{L}\s]/gu, ''); // Reemplazar caracteres no permitidos
+            $("#Apellidos").val(value);
+        }
+
+        if (value.length > 100) {
+            value = value.slice(0, 100);
+            $("#Apellidos").val(value);
+        }
+    });
+
+    // Función para calcular la edad
+    function calcularEdad(fechaNacimiento) {
+        const hoy = new Date();
+        const nacimiento = new Date(fechaNacimiento);
+        let edad = hoy.getFullYear() - nacimiento.getFullYear();
+        const mes = hoy.getMonth() - nacimiento.getMonth();
+
+        // Ajustar si el cumpleaños aún no ha ocurrido este año
+        if (mes < 0 || (mes === 0 && hoy.getDate() < nacimiento.getDate())) {
+            edad--;
+        }
+        return edad;
+    }
+
+    // Evento que escucha cuando el usuario selecciona una fecha
+    document.getElementById("FechaNacimiento").addEventListener("change", function () {
+        const fechaNacimiento = this.value;
+        const edad = calcularEdad(fechaNacimiento);
+        document.getElementById("Edad").value = edad;
+    });
+
+</script>

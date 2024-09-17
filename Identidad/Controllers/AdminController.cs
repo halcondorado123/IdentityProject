@@ -37,7 +37,7 @@ namespace Identidad.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(Usuario usuario)
         {
-            if (ModelState.IsValid)
+           if (ModelState.IsValid)
             {
                 // Crear el nuevo usuario para el sistema de autenticación
                 var appUsuario = new AppUsuario

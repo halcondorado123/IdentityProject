@@ -16,6 +16,8 @@ namespace Identidad.Models
         public string? TipoDocumento { get; set; }
         public string? NumeroDocumento { get; set; }
         public DateTime? FechaNacimiento { get; set; }
+        public DateTime? FechaExpedicion { get; set; }
+        public DateTime? FechaVencimiento { get; set; }
         public int Edad { get; set; }
         public string? PaisNacimiento { get; set; }
         public string? DepartamentoNacimiento { get; set; }

@@ -60,6 +60,23 @@
             transition: background-color 0.3s ease;
         }
 
+            .toggle-btn i {
+                font-size: 24px;
+                transition: opacity 0.3s ease;
+            }
+
+            .toggle-btn .bi-chevron-right {
+                opacity: 0;
+            }
+
+        .sidebar-hidden .bi-chevron-right {
+            opacity: 1;
+        }
+
+        .sidebar-visible .bi-chevron-left {
+            opacity: 1;
+        }
+
             .toggle-btn:hover {
                 background-color: #0056b3;
             }
@@ -143,8 +160,7 @@
 
         <!-- Botón de toggle incrustado en el sidebar -->
         <button class="toggle-btn" id="toggleSidebar">
-            <i class="bi bi-chevron-left"></i> <!-- Icono de flecha hacia la izquierda por defecto -->
-            <i class="bi bi-chevron-right"></i> <!-- Icono de flecha hacia la derecha cuando está oculto -->
+            <i id="iconToggle" class="bi bi-chevron-left"></i> <!-- Icono de flecha hacia la izquierda por defecto -->
         </button>
     </div>
 
@@ -162,47 +178,60 @@
             var sidebar = document.getElementById('sidebar');
             var content = document.querySelector('.content-wrapper');
             var toggleButton = document.getElementById('toggleSidebar');
+            var iconToggle = document.getElementById('iconToggle');
             var userMenuLink = document.getElementById('userMenuLink');
-            var subMenu = userMenuLink.nextElementSibling;
+            var subMenu = userMenuLink ? userMenuLink.nextElementSibling : null; // Protección si userMenuLink no está presente
 
-            // Configura el estado inicial del contenido
-            if (sidebar.classList.contains('sidebar-hidden')) {
-                content.style.marginLeft = '0';
-            } else {
-                content.style.marginLeft = '280px';
+            // Configura el estado inicial del contenido y del ícono
+            function updateSidebarState() {
+                if (sidebar.classList.contains('sidebar-hidden')) {
+                    content.style.marginLeft = '0';
+                    iconToggle.classList.remove('bi-chevron-left');
+                    iconToggle.classList.add('bi-chevron-right');
+                } else {
+                    content.style.marginLeft = '280px';
+                    iconToggle.classList.remove('bi-chevron-right');
+                    iconToggle.classList.add('bi-chevron-left');
+                }
             }
+
+            updateSidebarState(); // Configura el estado inicial
 
             // Maneja el evento de clic en el botón de toggle
             toggleButton.addEventListener('click', function () {
                 if (sidebar.classList.contains('sidebar-visible')) {
                     sidebar.classList.remove('sidebar-visible');
                     sidebar.classList.add('sidebar-hidden');
-                    content.style.marginLeft = '0';
-
-                    // Oculta todos los submenús cuando se oculta el sidebar
-                    document.querySelectorAll('.sub-menu.show').forEach(function (menu) {
-                        menu.classList.remove('show');
-                    });
                 } else {
                     sidebar.classList.remove('sidebar-hidden');
                     sidebar.classList.add('sidebar-visible');
-                    content.style.marginLeft = '280px';
                 }
+                updateSidebarState(); // Actualiza el estado después del toggle
+
+                // Oculta todos los submenús cuando se oculta el sidebar
+                document.querySelectorAll('.sub-menu.show').forEach(function (menu) {
+                    menu.classList.remove('show');
+                });
             });
 
-            // Maneja el evento de clic en el enlace del menú de usuario
-            userMenuLink.addEventListener('click', function () {
-                if (sidebar.classList.contains('sidebar-hidden')) {
-                    return;
-                }
-
-                subMenu.classList.toggle('show');
-            });
+            // Maneja el evento de clic en el enlace del menú de usuario si existe
+            if (userMenuLink) {
+                userMenuLink.addEventListener('click', function () {
+                    if (sidebar.classList.contains('sidebar-hidden')) {
+                        return;
+                    }
+                    if (subMenu) {
+                        subMenu.classList.toggle('show');
+                    }
+                });
+            }
 
             // Cierra el submenú si se hace clic fuera del menú
             document.addEventListener('click', function (e) {
-                if (!sidebar.contains(e.target) && !userMenuLink.contains(e.target)) {
-                    subMenu.classList.remove('show');
+                if (userMenuLink && !sidebar.contains(e.target) && !userMenuLink.contains(e.target)) {
+                    if (subMenu) {
+                        subMenu.classList.remove('show');
+                    }
                 }
             });
         });

@@ -15,7 +15,7 @@
 
     /* Contenedor para alinear el botón a la derecha */
     .button-container {
-        text-align: center; /* Alinea los elementos a la derecha */
+        text-align: center; /* Alinea los elementos al centro */
         margin-bottom: 1rem; /* Espacio debajo del botón */
     }
 
@@ -28,11 +28,14 @@
         /* Asegúrate de que el texto en los encabezados de la tabla esté centrado */
         .table-header th {
             vertical-align: middle; /* Centra verticalmente el texto en el encabezado */
+            min-height: 50px; /* Ajusta según sea necesario */
+            padding: 0.5rem; /* Espaciado interno */
         }
 
     .contain-container {
         width: 100%; /* Asegura que el contenedor ocupe todo el ancho disponible */
-        overflow: auto; /* Asegura que no haya problemas de desbordamiento */
+        overflow-x: auto; /* Permite el desbordamiento horizontal */
+        padding: 20px; /* Espaciado en el contenedor */
     }
 
     /* Centrar el contenido en las celdas */
@@ -63,44 +66,59 @@
         transition: background-color 0.3s;
     }
 
-        .btn-custom-danger:hover {
-            background-color: #c82333; /* Rojo más oscuro */
-        }
+    #searchInput {
+        width: 250px; /* Ajusta el valor según sea necesario */
+    }
+
+    .input-container {
+        display: flex;
+        justify-content: flex-end; /* Alinea el contenido al final del contenedor */
+    }
+
+    .btn-custom-danger:hover {
+        background-color: #c82333; /* Rojo más oscuro */
+    }
 </style>
 
 <h2 style="text-align: center; margin-top: 2%;">Control de Usuarios</h2>
-    <p style="text-align: justify; margin: 2% 6%">
-        En este módulo se podrán llevar a cabo la creación, actualización y eliminación de usuarios de la compañía. Toda la información generada será registrada y dará lugar a un seguimiento en nuestras bases de datos.
-    </p>
+<p style="text-align:center;">
+    En este módulo se podrán llevar a cabo la creación, actualización y eliminación de usuarios de la compañía. Toda la información generada será registrada y dará lugar a un seguimiento en nuestras bases de datos.
+</p>
 
 <div class="container">
     <!-- Input de búsqueda -->
-    <input class="form-control" id="myInput" type="text" placeholder="Buscar...">
+    <div class="input-container">
+        <input class="form-control my-input" id="searchInput" type="text" placeholder="Buscar...">
+    </div>
     <br>
 
+
+    <!-- SI VE ESTE CODIGO SIGNIFICA QUE ESTE ES EL CORRECTO PARA ARREGLAR LOS ROLES -->
     <!-- Tabla de usuarios -->
     <table class="table table-bordered table-striped" id="myTable">
         <thead>
             <tr class="table-header">
+                <th>Acciones</th>
                 <th>ID</th>
                 <th>Nombre</th>
                 <th>Email</th>
-                <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
             @foreach (AppUsuario Usuario in Model)
             {
                 <tr>
+                    <td>
+                        <a class="btn btn-sm btn-primary" asp-action="Update" asp-route-id="@Usuario.Id"><i class="fa-solid fa-pen-to-square"></i></a>
+                        <form asp-action="Delete" asp-route-id="@Usuario.Id" method="post" style="display:inline;">
+                            <button type="submit" class="btn btn-sm btn-danger"><i class="fa-solid fa-trash"></i></button>
+                        </form>
+                        <a class="btn btn-sm btn-success" asp-action="" asp-route-id="@Usuario.Id"><i class="fa-solid fa-eye"></i></a>
+                    </td>
                     <td>@Usuario.Id</td>
                     <td>@Usuario.UserName</td>
                     <td>@Usuario.Email</td>
-                    <td>
-                        <a class="btn btn-sm btn-primary" asp-action="Update" asp-route-id="@Usuario.Id">Actualizar</a>
-                        <form asp-action="Delete" asp-route-id="@Usuario.Id" method="post" style="display:inline;">
-                            <button type="submit" class="btn btn-sm btn-danger">Eliminar</button>
-                        </form>
-                    </td>
+
                 </tr>
             }
 
@@ -121,11 +139,12 @@
 <!-- Scripts -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script src="https://kit.fontawesome.com/9c9ff965bd.js" crossorigin="anonymous"></script>
 
 
 <script>
     $(document).ready(function () {
-        $("#myInput").on("keyup", function () {
+        $("#searchInput").on("keyup", function () {
             var value = $(this).val().toLowerCase();
             var rows = $("#myTable tbody tr");
             var noResults = $("#noResults");
