@@ -58,8 +58,8 @@
     </div>
 
     <div class="form-group">
-        <label asp-for="PaisNacimiento"></label>
-        <select asp-for="PaisNacimiento" class="form-control">
+        <label asp-for="LugarNacimiento.Pais"></label>
+        <select asp-for="LugarNacimiento.Pais" class="form-control">
             <option value="">Selecciona un país</option>
             <option value="01">Colombia</option>
             <!-- Agrega más países si es necesario -->
@@ -67,8 +67,8 @@
     </div>
 
     <div class="form-group">
-        <label asp-for="DepartamentoNacimiento"></label>
-        <select asp-for="DepartamentoNacimiento" class="form-control">
+        <label asp-for="LugarNacimiento.Departamento"></label>
+        <select asp-for="LugarNacimiento.Departamento" class="form-control">
             <option value="">Selecciona un departamento</option>
             <option value="01">Amazonas</option>
             <option value="05">Antioquia</option>
@@ -85,8 +85,8 @@
     </div>
 
     <div class="form-group">
-        <label asp-for="MunicipioNacimiento"></label>
-        <select asp-for="MunicipioNacimiento" class="form-control">
+        <label asp-for="LugarNacimiento.Municipio"></label>
+        <select asp-for="LugarNacimiento.Municipio" class="form-control">
             <option value="">Selecciona un municipio</option>
             <option value="001">Municipio A</option>
             <option value="002">Municipio B</option>
@@ -95,13 +95,13 @@
     </div>
 
     <div class="form-group">
-        <label asp-for="DireccionDomicilio"></label>
-        <input asp-for="DireccionDomicilio" class="form-control" />
+        <label asp-for="Domicilio.Direccion"></label>
+        <input asp-for="Domicilio.Direccion" class="form-control" />
     </div>
 
     <div class="form-group">
-        <label asp-for="PaisDomicilio"></label>
-        <select asp-for="PaisDomicilio" class="form-control">
+        <label asp-for="Domicilio.Pais"></label>
+        <select asp-for="Domicilio.Pais" class="form-control">
             <option value="">Selecciona un país</option>
             <option value="01">Colombia</option>
             <!-- Agrega más países si es necesario -->
@@ -109,8 +109,8 @@
     </div>
 
     <div class="form-group">
-        <label asp-for="DepartamentoDomicilio"></label>
-        <select asp-for="DepartamentoDomicilio" class="form-control">
+        <label asp-for="Domicilio.Departamento"></label>
+        <select asp-for="Domicilio.Departamento" class="form-control">
             <option value="">Selecciona un departamento</option>
             <option value="01">Amazonas</option>
             <option value="05">Antioquia</option>
@@ -128,8 +128,8 @@
 
 
     <div class="form-group">
-        <label asp-for="MunicipioDomicilio"></label>
-        <select asp-for="MunicipioDomicilio" class="form-control">
+        <label asp-for="Domicilio.Municipio"></label>
+        <select asp-for="Domicilio.Municipio" class="form-control">
             <option value="">Selecciona un municipio</option>
             <option value="001">Municipio A</option>
             <option value="002">Municipio B</option>
@@ -152,34 +152,6 @@
     <div class="form-group">
         <label asp-for="TelefonoFijo"></label>
         <input asp-for="TelefonoFijo" class="form-control" />
-    </div>
-
-    <div class="form-group">
-        <label asp-for="ContratoEmpleado"></label>
-        <select asp-for="ContratoEmpleado" class="form-control">
-            <option value="">Selecciona un contrato</option>
-            <option value="1">Contrato a Término Indefinido</option>
-            <option value="2">Contrato a Término Fijo</option>
-            <option value="3">Contrato de Obra o Labor</option>
-            <option value="4">Contrato de Aprendizaje</option>
-            <option value="5">Contrato de Servicios</option>
-            <option value="6">Contrato Temporal</option>
-            <option value="7">Contrato de Trabajo por Horas</option>
-            <option value="8">Contrato de Empleo en Mínimo Vital</option>
-            <option value="9">Contrato de Trabajo en el Exterior</option>
-            <option value="10">Contrato de Trabajo en la Industria</option>
-            <!-- Agrega más contratos si es necesario -->
-        </select>
-    </div>
-
-    <div class="form-group">
-        <label asp-for="Salario"></label>
-        <input asp-for="Salario" class="form-control" />
-    </div>
-
-    <div class="form-group">
-        <label asp-for="CargoEmpleado"></label>
-        <input asp-for="CargoEmpleado" class="form-control" />
     </div>
 
     <button type="submit" class="btn btn-primary">Guardar</button>

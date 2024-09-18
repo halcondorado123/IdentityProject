@@ -6,6 +6,15 @@
 }
 
 <style>
+    label{
+        font-weight: bold;
+        color: #5d5c5c;
+    }
+
+    input{
+        color: red;
+    }
+
     .container-fluid {
         padding: 0;
     }
@@ -48,22 +57,21 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-md-12">
-            <h1 class="bg-info text-white">Crear Usuario</h1>
-            <a asp-action="Index" class="btn btn-secondary">Atrás</a>
-            <div class="text-danger mt-3"></div>
-        </div>
+        <h2 style="text-align: center;">Creación de usuario</h2>
+        <p style="text-align:center;">
+            En este módulo se podrán llevar a cabo la creación de un nuevo usuario de la compañía. Toda la información generada será registrada y dará lugar a un seguimiento en nuestras bases de datos.
+        </p>
     </div>
-    <form method="post">
+    <form asp-action="Create" method="post">
         <!-- Fila 1 -->
         <div class="row">
             <h3 style="margin-top:20px">Datos de Identificación</h3>
             <hr />
 
             <!-- Primera columna -->
-            <div class="form-group col-md-4">
-                <label for="TipoDocumento">Tipo de Documento</label>
-                <select id="TipoDocumento" class="form-control">
+            <div class="form-group col-md-3">
+                <label for="TipoDocumento">Tipo de Documento*</label>
+                <select id="TipoDocumento" class="form-control" required>
                     <option value="">Selecciona un documento</option>
                     <option value="1">Cédula</option>
                     <option value="2">Cédula de extranjería</option>
@@ -72,38 +80,57 @@
             </div>
 
             <!-- Segunda columna -->
-            <div class="form-group col-md-4">
-                <label for="NumeroDocumento"> Número de documento
-                    <i class="fa-solid fa-circle-info" data-toggle="tooltip" data-placement="top" title="Agregar información"></i>
+            <div class="form-group col-md-3">
+                <label for="NumeroDocumento"> Número de documento*
+                    <i class="fa-solid fa-circle-info" data-toggle="tooltip" data-placement="top"
+                       title="Ingrese su número de documento:
+              * Cédula de ciudadanía: hasta 14 dígitos numéricos.
+              * Cédula de extranjería: hasta 14 dígitos numéricos.
+              * Pasaporte: 3 letras seguidas de hasta 10 números." /></i>
                 </label>
-
-                <input type="text" id="NumeroDocumento" class="form-control" autocomplete="off" />
+                <input type="text" id="NumeroDocumento" class="form-control" autocomplete="off" required />
             </div>
 
             <!-- Lugar de Expedición -->
-            <div class="form-group col-md-4">
-                <label for="LugarExpedicion">Lugar de Expedición</label>
-                <input type="text" id="LugarExpedicion" class="form-control" autocomplete="off" />
+            <div class="form-group col-md-3">
+                <label for="LugarExpedicion">Lugar de Expedición*</label>
+                <input type="text" id="LugarExpedicion" class="form-control" autocomplete="off" required />
+            </div>
+
+            <!-- Grupo sanguineo -->
+            <div class="form-group col-md-3">
+                <label for="GrupoSanguineo">RH*</label>
+                <select id="GrupoSanguineo" class="form-control" required>
+                    <option value="">Selecciona tu tipo de sangre</option>
+                    <option value="O+">O+</option>
+                    <option value="O-">O-</option>
+                    <option value="A+">A+</option>
+                    <option value="A-">A-</option>
+                    <option value="B+">B+</option>
+                    <option value="B-">B-</option>
+                    <option value="AB+">AB+</option>
+                    <option value="AB-">AB-</option>
+                </select>
             </div>
 
             <div class="form-group col-md-6">
-                <label for="Nombres">Nombres</label>
-                <input type="text" id="Nombres" class="form-control" autocomplete="off" />
+                <label for="Nombres">Nombre*</label>
+                <input type="text" id="Nombres" class="form-control" autocomplete="off" required />
             </div>
 
             <div class="form-group col-md-6">
-                <label for="Apellidos">Apellidos</label>
-                <input type="text" id="Apellidos" class="form-control" autocomplete="off" />
+                <label for="Apellidos">Apellidos*</label>
+                <input type="text" id="Apellidos" class="form-control" autocomplete="off" required />
             </div>
 
             <div class="form-group col-md-3">
-                <label for="FechaNacimiento">Fecha de Nacimiento</label>
-                <input type="date" id="FechaNacimiento" class="form-control" />
+                <label for="FechaNacimiento">Fecha de Nacimiento*</label>
+                <input type="date" id="FechaNacimiento" class="form-control" required />
             </div>
 
             <div class="form-group col-md-3">
-                <label for="FechaExpedicion">Fecha de Expedición</label>
-                <input type="date" id="FechaExpedicion" class="form-control" />
+                <label for="FechaExpedicion">Fecha de Expedición*</label>
+                <input type="date" id="FechaExpedicion" class="form-control" required />
             </div>
 
             <div class="form-group col-md-3">
@@ -116,12 +143,12 @@
                 <input type="number" id="Edad" class="form-control" disabled />
             </div>
 
-            <h3 style="margin-top:20px">Datos Geográficos del Nacimiento</h3>
+            <h3 style="margin-top:20px">Datos Geográficos del Nacimiento*</h3>
             <hr />
 
             <div class="form-group col-md-4">
-                <label for="PaisNacimiento">País de Nacimiento</label>
-                <select id="PaisNacimiento" class="form-control">
+                <label for="PaisNacimiento">País de Nacimiento*</label>
+                <select id="PaisNacimiento" class="form-control" required>
                     <option value="">Selecciona un país de nacimiento</option>
                     <option value="CO">Colombia</option>
                     <option value="AR">Argentina</option>
@@ -136,8 +163,8 @@
                 </select>
             </div>
             <div class="form-group col-md-4">
-                <label for="DepartamentoNacimiento">Departamento de Nacimiento</label>
-                <select id="DepartamentoNacimiento" class="form-control">
+                <label for="DepartamentoNacimiento">Departamento de Nacimiento*</label>
+                <select id="DepartamentoNacimiento" class="form-control" required>
                     <option value="">Selecciona un departamento de nacimiento</option>
                     <option value="01">Amazonas</option>
                     <option value="05">Antioquia</option>
@@ -152,8 +179,8 @@
                 </select>
             </div>
             <div class="form-group col-md-4">
-                <label for="MunicipioNacimiento">Municipio de Nacimiento</label>
-                <select id="MunicipioNacimiento" class="form-control">
+                <label for="MunicipioNacimiento">Municipio de Nacimiento*</label>
+                <select id="MunicipioNacimiento" class="form-control" required>
                     <option value="">Selecciona un municipio de nacimiento</option>
                     <option value="001">Leticia</option>
                     <option value="002">Puerto Nariño</option>
@@ -171,12 +198,39 @@
             <h3 style="margin-top:20px">Información de Contacto</h3>
             <hr />
 
+            <!-- Este no puede ser igual al corporativo, limitarlo a un condicional para que no se repita esa información -->
+            <div class="form-group col-md-3">
+                <label for="EmailPersonal">Correo electrónico*</label>
+                <input type="email" id="EmailPersonal" class="form-control" />
+            </div>
+
+            <div class="form-group col-md-3">
+                <label for="Celular">Celular*</label>
+                <input type="tel" id="Celular" class="form-control" />
+            </div>
+
+            <div class="form-group col-md-3">
+                <label for="Telefono">Teléfono*</label>
+                <input type="tel" id="Telefono" class="form-control" />
+            </div>
+
+            <div class="form-group col-md-3">
+                <label for="EstadoCivil">Estado Civil*</label>
+                <select id="EstadoCivil" class="form-control">
+                    <option value="">Selecciona un estado civil</option>
+                    <option value="soltero">Soltero</option>
+                    <option value="casado">Casado</option>
+                    <option value="divorciado">Divorciado</option>
+                    <option value="viudo">Viudo</option>
+                </select>
+            </div>
+
             <div class="form-group col-md-6">
-                <label for="DireccionDomicilio">Dirección de Domicilio</label>
-                <input type="text" id="DireccionDomicilio" class="form-control" autocomplete="off" />
+                <label for="DireccionDomicilio">Dirección de Domicilio*</label>
+                <input type="text" id="DireccionDomicilio" class="form-control" autocomplete="off" required />
             </div>
             <div class="form-group col-md-6">
-                <label for="PaisDomicilio">País de Domicilio</label>
+                <label for="PaisDomicilio">País de Domicilio*</label>
                 <select id="PaisDomicilio" class="form-control">
                     <option value="">Selecciona un país de domicilio</option>
                     <option value="CO">Colombia</option>
@@ -192,8 +246,8 @@
                 </select>
             </div>
             <div class="form-group col-md-6">
-                <label for="DepartamentoDomicilio">Departamento de Domicilio</label>
-                <select id="DepartamentoDomicilio" class="form-control">
+                <label for="DepartamentoDomicilio">Departamento de Domicilio*</label>
+                <select id="DepartamentoDomicilio" class="form-control" required>
                     <option value="">Selecciona un departamento de domicilio</option>
                     <option value="01">Amazonas</option>
                     <option value="05">Antioquia</option>
@@ -208,8 +262,8 @@
                 </select>
             </div>
             <div class="form-group col-md-6">
-                <label for="MunicipioDomicilio">Municipio de Domicilio</label>
-                <select id="MunicipioDomicilio" class="form-control">
+                <label for="MunicipioDomicilio">Municipio de Domicilio*</label>
+                <select id="MunicipioDomicilio" class="form-control" required>
                     <option value="">Selecciona un municipio de domicilio</option>
                     <option value="001">Leticia</option>
                     <option value="002">Puerto Nariño</option>
@@ -224,7 +278,33 @@
                 </select>
             </div>
 
-            <div class="form-group col-md-12 text-center">
+           
+
+
+            <h3 style="margin-top:20px">Información de usuario</h3>
+            <hr />
+
+            <div class="form-group col-md-6">
+                <label for="NombreUsuario">Nombre de Usuario</label>
+                <input type="text" id="NombreUsuario" class="form-control" />
+            </div>
+
+            <div class="form-group col-md-6">
+                <label for="EmailCorporativo">Email Corporativo</label>
+                <input type="email" id="EmailCorporativo" class="form-control" />
+            </div>
+
+            <div class="form-group col-md-6">
+                <label for="Password">Contraseña</label>
+                <input type="password" id="Password" class="form-control" />
+            </div>
+
+            <div class="form-group col-md-6">
+                <label for="Password">Confirma la contraseña</label>
+                <input type="password" id="ConfirmaPassword" class="form-control" />
+            </div>
+
+             <div class="form-group col-md-12 text-center" style="margin-top: 30px;">
                 <button type="submit" class="btn btn-primary">Guardar</button>
             </div>
         </div>
@@ -365,6 +445,21 @@
         const fechaNacimiento = this.value;
         const edad = calcularEdad(fechaNacimiento);
         document.getElementById("Edad").value = edad;
+    });
+
+    // Confirmar contraseña
+    document.getElementById('submitBtn').addEventListener('click', function () {
+        const password = document.getElementById('Password').value;
+        const confirmPassword = document.getElementById('ConfirmaPassword').value;
+        const errorMessage = document.getElementById('errorMessage');
+
+        if (password !== confirmPassword) {
+            errorMessage.textContent = 'Escriba bien esa mierda.';
+        } else {
+            errorMessage.textContent = '';
+            // Aquí puedes proceder con el envío del formulario
+            alert('Las contraseñas coinciden. ¡Formulario enviado!');
+        }
     });
 
 </script>
