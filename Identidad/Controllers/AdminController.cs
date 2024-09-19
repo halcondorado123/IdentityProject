@@ -72,6 +72,7 @@ namespace Identidad.Controllers
                     EmailPersonal = personaME.EmailPersonal,
                     TelefonoCelular = personaME.TelefonoCelular,
                     TelefonoFijo = personaME.TelefonoFijo,
+                    EstadoCivil = personaME.EstadoCivil,
                     FechaCreacion = personaME.FechaCreacion,
                     FechaActualizacion = personaME.FechaActualizacion
 

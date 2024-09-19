@@ -5,7 +5,7 @@ namespace Identidad.Models.ModelUsuario
     [Table("TipoDocumentoME", Schema = "Iden")]
     public class TipoDocumentoME
     {
-        public int? Id { get; set; }
+        public int? DocumentoId { get; set; }
         public string? TipoDocumento { get; set; }
     }
 }

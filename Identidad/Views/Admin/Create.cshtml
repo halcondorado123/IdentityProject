@@ -71,12 +71,7 @@
             <!-- Primera columna -->
             <div class="form-group col-md-3">
                 <label for="TipoDocumento">Tipo de Documento*</label>
-                <select id="TipoDocumento" class="form-control" required>
-                    <option value="">Selecciona un documento</option>
-                    <option value="1">Cédula</option>
-                    <option value="2">Cédula de extranjería</option>
-                    <option value="3">Pasaporte</option>
-                </select>
+                <select id="TipoDocumento" class="form-control" required></select>
             </div>
 
             <!-- Segunda columna -->
@@ -100,17 +95,7 @@
             <!-- Grupo sanguineo -->
             <div class="form-group col-md-3">
                 <label for="GrupoSanguineo">RH*</label>
-                <select id="GrupoSanguineo" class="form-control" required>
-                    <option value="">Selecciona tu tipo de sangre</option>
-                    <option value="O+">O+</option>
-                    <option value="O-">O-</option>
-                    <option value="A+">A+</option>
-                    <option value="A-">A-</option>
-                    <option value="B+">B+</option>
-                    <option value="B-">B-</option>
-                    <option value="AB+">AB+</option>
-                    <option value="AB-">AB-</option>
-                </select>
+                <select id="GrupoSanguineo" class="form-control" required></select>
             </div>
 
             <div class="form-group col-md-6">
@@ -148,51 +133,18 @@
 
             <div class="form-group col-md-4">
                 <label for="PaisNacimiento">País de Nacimiento*</label>
-                <select id="PaisNacimiento" class="form-control" required>
-                    <option value="">Selecciona un país de nacimiento</option>
-                    <option value="CO">Colombia</option>
-                    <option value="AR">Argentina</option>
-                    <option value="BR">Brasil</option>
-                    <option value="CL">Chile</option>
-                    <option value="PE">Perú</option>
-                    <option value="VE">Venezuela</option>
-                    <option value="MX">México</option>
-                    <option value="EC">Ecuador</option>
-                    <option value="UY">Uruguay</option>
-                    <option value="PY">Paraguay</option>
-                </select>
+                <select id="PaisNacimiento" class="form-control" required></select>
             </div>
-            <div class="form-group col-md-4">
+
+            <!-- Dropdown de Departamento -->
+            <div class="form-group col-md-3">
                 <label for="DepartamentoNacimiento">Departamento de Nacimiento*</label>
-                <select id="DepartamentoNacimiento" class="form-control" required>
-                    <option value="">Selecciona un departamento de nacimiento</option>
-                    <option value="01">Amazonas</option>
-                    <option value="05">Antioquia</option>
-                    <option value="08">Atlántico</option>
-                    <option value="11">Bogotá, D.C.</option>
-                    <option value="13">Bolívar</option>
-                    <option value="15">Boyacá</option>
-                    <option value="17">Caldas</option>
-                    <option value="18">Caquetá</option>
-                    <option value="19">Casanare</option>
-                    <option value="20">Cauca</option>
-                </select>
+                <select id="DepartamentoNacimiento" class="form-control" disabled required></select>
             </div>
+
             <div class="form-group col-md-4">
                 <label for="MunicipioNacimiento">Municipio de Nacimiento*</label>
-                <select id="MunicipioNacimiento" class="form-control" required>
-                    <option value="">Selecciona un municipio de nacimiento</option>
-                    <option value="001">Leticia</option>
-                    <option value="002">Puerto Nariño</option>
-                    <option value="01001">Medellín</option>
-                    <option value="01002">Envigado</option>
-                    <option value="08001">Barranquilla</option>
-                    <option value="08078">Soledad</option>
-                    <option value="11001">Bogotá</option>
-                    <option value="13052">Cartagena</option>
-                    <option value="15001">Tunja</option>
-                    <option value="17001">Manizales</option>
-                </select>
+                <select id="MunicipioNacimiento" class="form-control" disabled required></select>
             </div>
 
             <h3 style="margin-top:20px">Información de Contacto</h3>
@@ -217,11 +169,7 @@
             <div class="form-group col-md-3">
                 <label for="EstadoCivil">Estado Civil*</label>
                 <select id="EstadoCivil" class="form-control">
-                    <option value="">Selecciona un estado civil</option>
-                    <option value="soltero">Soltero</option>
-                    <option value="casado">Casado</option>
-                    <option value="divorciado">Divorciado</option>
-                    <option value="viudo">Viudo</option>
+                    <option value="">Seleccione un estado civil</option>
                 </select>
             </div>
 
@@ -231,55 +179,18 @@
             </div>
             <div class="form-group col-md-6">
                 <label for="PaisDomicilio">País de Domicilio*</label>
-                <select id="PaisDomicilio" class="form-control">
-                    <option value="">Selecciona un país de domicilio</option>
-                    <option value="CO">Colombia</option>
-                    <option value="AR">Argentina</option>
-                    <option value="BR">Brasil</option>
-                    <option value="CL">Chile</option>
-                    <option value="PE">Perú</option>
-                    <option value="VE">Venezuela</option>
-                    <option value="MX">México</option>
-                    <option value="EC">Ecuador</option>
-                    <option value="UY">Uruguay</option>
-                    <option value="PY">Paraguay</option>
-                </select>
+                <select id="PaisDomicilio" class="form-control"></select>
             </div>
+
             <div class="form-group col-md-6">
                 <label for="DepartamentoDomicilio">Departamento de Domicilio*</label>
-                <select id="DepartamentoDomicilio" class="form-control" required>
-                    <option value="">Selecciona un departamento de domicilio</option>
-                    <option value="01">Amazonas</option>
-                    <option value="05">Antioquia</option>
-                    <option value="08">Atlántico</option>
-                    <option value="11">Bogotá, D.C.</option>
-                    <option value="13">Bolívar</option>
-                    <option value="15">Boyacá</option>
-                    <option value="17">Caldas</option>
-                    <option value="18">Caquetá</option>
-                    <option value="19">Casanare</option>
-                    <option value="20">Cauca</option>
-                </select>
+                <select id="DepartamentoDomicilio" class="form-control" disabled required></select>
             </div>
+
             <div class="form-group col-md-6">
                 <label for="MunicipioDomicilio">Municipio de Domicilio*</label>
-                <select id="MunicipioDomicilio" class="form-control" required>
-                    <option value="">Selecciona un municipio de domicilio</option>
-                    <option value="001">Leticia</option>
-                    <option value="002">Puerto Nariño</option>
-                    <option value="01001">Medellín</option>
-                    <option value="01002">Envigado</option>
-                    <option value="08001">Barranquilla</option>
-                    <option value="08078">Soledad</option>
-                    <option value="11001">Bogotá</option>
-                    <option value="13052">Cartagena</option>
-                    <option value="15001">Tunja</option>
-                    <option value="17001">Manizales</option>
-                </select>
+                <select id="MunicipioDomicilio" class="form-control" disabled required></select>
             </div>
-
-           
-
 
             <h3 style="margin-top:20px">Información de usuario</h3>
             <hr />
@@ -312,7 +223,7 @@
 </div>
 
 
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>  <!-- Versión completa -->
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://kit.fontawesome.com/9c9ff965bd.js" crossorigin="anonymous"></script>
@@ -321,6 +232,19 @@
 <!-- Tu HTML aquí -->
 
 <script>
+
+
+    $(document).ready(function () {
+        cargarTipoDocumento();
+        cargarTipoRH();
+        cargarEstadoCivil();  // Llamar a la función cuando la página carga
+        cargarPais("PaisNacimiento");
+        cargarPais("PaisDomicilio");
+        cargarDepartamento('PaisNacimiento', 'DepartamentoNacimiento');     // Va relacion ID pais y dpto en JS.
+        cargarDepartamento('PaisDomicilio', 'DepartamentoDomicilio');       // Va relacion ID pais y dpto en JS.
+        cargarMunicipio('DepartamentoNacimiento', 'MunicipioNacimiento');
+        cargarMunicipio('DepartamentoDomicilio', 'MunicipioDomicilio');
+    });
 
     // Inicializar el valor del campo con el valor almacenado en localStorage
     $("#NumeroDocumento").val(localStorage.getItem("NumeroDocumento"));
@@ -447,19 +371,234 @@
         document.getElementById("Edad").value = edad;
     });
 
-    // Confirmar contraseña
-    document.getElementById('submitBtn').addEventListener('click', function () {
-        const password = document.getElementById('Password').value;
-        const confirmPassword = document.getElementById('ConfirmaPassword').value;
-        const errorMessage = document.getElementById('errorMessage');
+    // // Confirmar contraseña
+    // document.getElementById('submitBtn').addEventListener('click', function () {
+    //     const password = document.getElementById('Password').value;
+    //     const confirmPassword = document.getElementById('ConfirmaPassword').value;
+    //     const errorMessage = document.getElementById('errorMessage');
 
-        if (password !== confirmPassword) {
-            errorMessage.textContent = 'Escriba bien esa mierda.';
-        } else {
-            errorMessage.textContent = '';
-            // Aquí puedes proceder con el envío del formulario
-            alert('Las contraseñas coinciden. ¡Formulario enviado!');
-        }
-    });
+    //     if (password !== confirmPassword) {
+    //         errorMessage.textContent = 'Escriba bien esa mierda.';
+    //     } else {
+    //         errorMessage.textContent = '';
+    //         // Aquí puedes proceder con el envío del formulario
+    //         alert('Las contraseñas coinciden. ¡Formulario enviado!');
+    //     }
+    // });
+
+
+    // DDL FORMS
+
+    function cargarTipoDocumento() {
+        $.ajax({
+            url: "@Url.Action("ObtenerTipoDocumento", "DropDownLists")",  // Ruta al controlador
+            type: "GET",  // Usa GET
+            dataType: "json",  // Esperamos JSON
+            success: function (response) {
+                console.log(response);
+                // Limpiar el select y agregar la opción por defecto
+                $("#TipoDocumento").html(`<option value="">Seleccione una opción</option>`);
+
+                // Verificar si la respuesta tiene datos
+                if (response && response.length > 0) {
+                    // Agregar opciones al select
+                    response.forEach(function (tipoDocumento) {
+                        $("#TipoDocumento").append(`<option value='${tipoDocumento.documentoId}'>${tipoDocumento.tipoDocumento}</option>`);
+                    });
+                } else {
+                    // Mensaje si no hay datos disponibles
+                    $("#TipoDocumento").append(`<option value="">Seleccione una opción</option>`);
+                }
+            },
+            error: function (xhr, status, error) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Ocurrió un error al cargar los tipos de documentos. Por favor, inténtalo de nuevo más tarde.'
+                });
+            }
+        });
+    }
+
+    function cargarTipoRH() {
+        $.ajax({
+            url: "@Url.Action("ObtenerTipoRH", "DropDownLists")",  // Ruta al controlador
+            type: "GET",  // Usa GET
+            dataType: "json",  // Esperamos JSON
+            success: function (response) {
+                console.log(response);
+                // Limpiar el select y agregar la opción por defecto
+                $("#GrupoSanguineo").html(`<option value="">Seleccione una opción</option>`);
+
+                // Verificar si la respuesta tiene datos
+                if (response && response.length > 0) {
+                    // Agregar opciones al select
+                    response.forEach(function (tipoSangre) {
+                        $("#GrupoSanguineo").append(`<option value='${tipoSangre.grupoSanguineoId}'>${tipoSangre.grupoSanguineo}</option>`);
+                    });
+                } else {
+                    // Mensaje si no hay datos disponibles
+                    $("#GrupoSanguineo").append(`<option value="">Seleccione una opción</option>`);
+                }
+            },
+            error: function (xhr, status, error) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Ocurrió un error al cargar los tipos de sangre. Por favor, inténtalo de nuevo más tarde.'
+                });
+            }
+        });
+    }
+
+    function cargarEstadoCivil() {
+        $.ajax({
+            url: "@Url.Action("ObtenerEstadoCivil", "DropDownLists")",  // Ruta al controlador
+            type: "GET",  // Usa GET
+            dataType: "json",  // Esperamos JSON
+            success: function (response) {
+                console.log(response);
+                // Limpiar el select y agregar la opción por defecto
+                $("#EstadoCivil").html(`<option value="">Seleccione una opción</option>`);
+
+                // Verificar si la respuesta tiene datos
+                if (response && response.length > 0) {
+                    // Agregar opciones al select
+                    response.forEach(function (estadoCivil) {
+                        $("#EstadoCivil").append(`<option value='${estadoCivil.estadoCivilId}'>${estadoCivil.estadoCivil}</option>`);
+                    });
+                } else {
+                    // Mensaje si no hay datos disponibles
+                    $("#EstadoCivil").append(`<option value="">Seleccione una opción</option>`);
+                }
+            },
+            error: function (xhr, status, error) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Ocurrió un error al cargar los estados civiles. Por favor, inténtalo de nuevo más tarde.'
+                });
+            }
+        });
+    }
+
+
+    function cargarPais(elementId) {
+        $.ajax({
+            url: "@Url.Action("ObtenerPaisUsuario", "DropDownLists")",
+            type: "GET",
+            dataType: "json",
+            success: function (response) {
+                console.log(response);
+                // Limpiar el select y agregar la opción por defecto
+                $(`#${elementId}`).html(`<option value="">Seleccione una opción</option>`);
+
+                // Verificar si la respuesta tiene datos
+                if (response && response.length > 0) {
+                    // Agregar opciones al select
+                    response.forEach(function (paisNacimiento) {
+                        $(`#${elementId}`).append(`<option value='${paisNacimiento.paisId}'>${paisNacimiento.pais}</option>`);
+                    });
+                } else {
+                    // Mensaje si no hay datos disponibles
+                    $(`#${elementId}`).append(`<option value="">Seleccione una opción</option>`);
+                }
+            },
+            error: function (xhr, status, error) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Ocurrió un error al cargar los paises. Por favor, inténtalo de nuevo más tarde.'
+                });
+            }
+        });
+    }
+
+    function cargarDepartamento(paisDropdownId, departamentoDropdownId) {
+        // Función que carga los departamentos al seleccionar un país
+        $(`#${paisDropdownId}`).change(function () {
+            var paisId = $(this).val(); // Obtener el ID del país seleccionado
+
+            // Si se seleccionó un país, cargar los departamentos
+            if (paisId) {
+                $.ajax({
+                    url: '@Url.Action("ObtenerDepartamentoUsuario", "DropDownLists")', // Controlador que devuelve departamentos
+                    type: 'GET',
+                    data: { paisId: paisId },  // Enviar el ID del país como parámetro
+                    dataType: 'json',
+                    success: function (response) {
+                        console.log(response);
+
+                        // Limpiar el dropdown de departamentos
+                        $(`#${departamentoDropdownId}`).html('<option value="">Seleccione una opción</option>');
+
+                        // Habilitar el dropdown de departamentos
+                        $(`#${departamentoDropdownId}`).prop('disabled', false);
+
+                        // Agregar los departamentos al dropdown
+                        response.forEach(function (departamento) {
+                            $(`#${departamentoDropdownId}`).append(`<option value='${departamento.departamentoId}'>${departamento.departamento}</option>`);
+                        });
+                    },
+                    error: function (xhr, status, error) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: 'Ocurrió un error al cargar los departamentos. Por favor, inténtalo de nuevo más tarde.'
+                        });
+                    }
+                });
+            } else {
+                // Si no se selecciona un país, deshabilitar el dropdown de departamentos
+                $(`#${departamentoDropdownId}`).html('<option value="">Seleccione una opción</option>');
+                $(`#${departamentoDropdownId}`).prop('disabled', true);
+            }
+        });
+    }
+
+    function cargarMunicipio(departamentoDropdownId, municipioDropDownId) {
+        // Función que carga los departamentos al seleccionar un país
+        $(`#${departamentoDropdownId}`).change(function () {
+            var departamentoId = $(this).val(); // Obtener el ID del país seleccionado
+
+            // Si se seleccionó un país, cargar los departamentos
+            if (departamentoId) {
+                $.ajax({
+                    url: '@Url.Action("ObtenerMunicipioUsuario", "DropDownLists")', // Controlador que devuelve departamentos
+                    type: 'GET',
+                    data: { departamentoId: departamentoId },  // Enviar el ID del país como parámetro
+                    dataType: 'json',
+                    success: function (response) {
+
+                        // Limpiar el dropdown de departamentos
+                        $(`#${municipioDropDownId}`).html('<option value="">Seleccione una opción</option>');
+
+                        // Habilitar el dropdown de departamentos
+                        $(`#${municipioDropDownId}`).prop('disabled', false);
+
+                        // Agregar los departamentos al dropdown
+                        response.forEach(function (municipio) {
+                            $(`#${municipioDropDownId}`).append(`<option value='${municipio.municipioId}'>${municipio.municipio}</option>`);
+                        });
+                    },
+                    error: function (xhr, status, error) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: 'Ocurrió un error al cargar los departamentos. Por favor, inténtalo de nuevo más tarde.'
+                        });
+                    }
+                });
+            } else {
+                // Si no se selecciona un país, deshabilitar el dropdown de departamentos
+                $(`#${departamentoDropdownId}`).html('<option value="">Seleccione una opción</option>');
+                $(`#${departamentoDropdownId}`).prop('disabled', true);
+                $(`#${municipioDropDownId}`).html('<option value="">Seleccione una opción</option>');
+                $(`#${municipioDropDownId}`).prop('disabled', true);
+            }
+        });
+    }
+
+
 
 </script>

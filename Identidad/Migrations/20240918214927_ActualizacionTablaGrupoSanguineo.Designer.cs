@@ -4,6 +4,7 @@ using Identidad.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Identidad.Migrations
 {
     [DbContext(typeof(IdentidadDbContext))]
-    partial class IdentidadDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240918214927_ActualizacionTablaGrupoSanguineo")]
+    partial class ActualizacionTablaGrupoSanguineo
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -52,9 +54,6 @@ namespace Identidad.Migrations
 
                     b.Property<string>("EmailPersonal")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("EstadoCivilId")
-                        .HasColumnType("int");
 
                     b.Property<int?>("EstatusId")
                         .HasColumnType("int");
@@ -121,7 +120,7 @@ namespace Identidad.Migrations
                     b.Property<string>("TelefonoFijo")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("TipoDocumentoDocumentoId")
+                    b.Property<int?>("TipoDocumentoId")
                         .HasColumnType("int");
 
                     b.Property<bool>("TwoFactorEnabled")
@@ -134,8 +133,6 @@ namespace Identidad.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("DomicilioId");
-
-                    b.HasIndex("EstadoCivilId");
 
                     b.HasIndex("EstatusId");
 
@@ -151,7 +148,7 @@ namespace Identidad.Migrations
 
                     b.HasIndex("RHGrupoSanguineoId");
 
-                    b.HasIndex("TipoDocumentoDocumentoId");
+                    b.HasIndex("TipoDocumentoId");
 
                     b.ToTable("AspNetUsers", (string)null);
                 });
@@ -244,22 +241,6 @@ namespace Identidad.Migrations
                     b.HasIndex("PaisId");
 
                     b.ToTable("DomicilioME", "Iden");
-                });
-
-            modelBuilder.Entity("Identidad.Models.ModelUsuario.EstadoCivilME", b =>
-                {
-                    b.Property<int?>("EstadoCivilId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("EstadoCivilId"), 1L, 1);
-
-                    b.Property<string>("EstadoCivil")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("EstadoCivilId");
-
-                    b.ToTable("EstadoCivilME", "Iden");
                 });
 
             modelBuilder.Entity("Identidad.Models.ModelUsuario.EstatusME", b =>
@@ -385,9 +366,6 @@ namespace Identidad.Migrations
                     b.Property<string>("EmailPersonal")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("EstadoCivilId")
-                        .HasColumnType("int");
-
                     b.Property<int?>("EstatusId")
                         .HasColumnType("int");
 
@@ -427,34 +405,32 @@ namespace Identidad.Migrations
                     b.Property<string>("TelefonoFijo")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("TipoDocumentoDocumentoId")
+                    b.Property<int?>("TipoDocumentoId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("EstadoCivilId");
 
                     b.HasIndex("EstatusId");
 
                     b.HasIndex("RHGrupoSanguineoId");
 
-                    b.HasIndex("TipoDocumentoDocumentoId");
+                    b.HasIndex("TipoDocumentoId");
 
                     b.ToTable("PersonaME", "Iden");
                 });
 
             modelBuilder.Entity("Identidad.Models.ModelUsuario.TipoDocumentoME", b =>
                 {
-                    b.Property<int?>("DocumentoId")
+                    b.Property<int?>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("DocumentoId"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("Id"), 1L, 1);
 
                     b.Property<string>("TipoDocumento")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("DocumentoId");
+                    b.HasKey("Id");
 
                     b.ToTable("TipoDocumentoME", "Iden");
                 });
@@ -675,10 +651,6 @@ namespace Identidad.Migrations
                         .WithMany()
                         .HasForeignKey("DomicilioId");
 
-                    b.HasOne("Identidad.Models.ModelUsuario.EstadoCivilME", "EstadoCivil")
-                        .WithMany()
-                        .HasForeignKey("EstadoCivilId");
-
                     b.HasOne("Identidad.Models.ModelUsuario.EstatusME", "Estatus")
                         .WithMany()
                         .HasForeignKey("EstatusId");
@@ -693,11 +665,9 @@ namespace Identidad.Migrations
 
                     b.HasOne("Identidad.Models.ModelUsuario.TipoDocumentoME", "TipoDocumento")
                         .WithMany()
-                        .HasForeignKey("TipoDocumentoDocumentoId");
+                        .HasForeignKey("TipoDocumentoId");
 
                     b.Navigation("Domicilio");
-
-                    b.Navigation("EstadoCivil");
 
                     b.Navigation("Estatus");
 
@@ -782,10 +752,6 @@ namespace Identidad.Migrations
 
             modelBuilder.Entity("Identidad.Models.ModelUsuario.PersonaME", b =>
                 {
-                    b.HasOne("Identidad.Models.ModelUsuario.EstadoCivilME", "EstadoCivil")
-                        .WithMany()
-                        .HasForeignKey("EstadoCivilId");
-
                     b.HasOne("Identidad.Models.ModelUsuario.EstatusME", "Estatus")
                         .WithMany()
                         .HasForeignKey("EstatusId");
@@ -798,9 +764,7 @@ namespace Identidad.Migrations
 
                     b.HasOne("Identidad.Models.ModelUsuario.TipoDocumentoME", "TipoDocumento")
                         .WithMany()
-                        .HasForeignKey("TipoDocumentoDocumentoId");
-
-                    b.Navigation("EstadoCivil");
+                        .HasForeignKey("TipoDocumentoId");
 
                     b.Navigation("Estatus");
 

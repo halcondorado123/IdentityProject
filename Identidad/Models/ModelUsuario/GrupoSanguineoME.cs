@@ -7,6 +7,6 @@ namespace Identidad.Models.ModelUsuario
     {
         public int GrupoSanguineoId { get; set; }
 
-        public string GrupSanguineo { get; set; }
+        public string? GrupoSanguineo { get; set; }
     }
 }

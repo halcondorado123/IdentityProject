@@ -14,7 +14,8 @@ namespace Identidad.Models
         public DbSet<DomicilioME> Domicilios { get; set; }
         public DbSet<EstatusME> Estatus { get; set; }
         public DbSet<GrupoSanguineoME> GrupoSanguineos { get; set; }
-        public DbSet<LugarNacimientoME> LugaresNacimientos { get; set; }
+        public DbSet<EstadoCivilME> EstadoCivil { get; set; }
+        public DbSet<LugarNacimientoME> LugaresNacimientos { get; set; }    // Evaluar posible eliminación
         public DbSet<MunicipioME> Municipios { get; set; }
         public DbSet<PaisME> Paises { get; set; }
         public DbSet<PersonaME> Personas { get; set; }
@@ -33,8 +34,9 @@ namespace Identidad.Models
             modelBuilder.Entity<Usuario>().HasKey(u => u.Id);
             modelBuilder.Entity<PersonaME>().HasKey(p => p.Id);
             modelBuilder.Entity<EstatusME>().HasKey(e => e.EstatusId);
-            modelBuilder.Entity<TipoDocumentoME>().HasKey(t => t.Id);
+            modelBuilder.Entity<TipoDocumentoME>().HasKey(t => t.DocumentoId);
             modelBuilder.Entity<GrupoSanguineoME>().HasKey(g => g.GrupoSanguineoId);
+            modelBuilder.Entity<EstadoCivilME>().HasKey(l => l.EstadoCivilId);
 
             modelBuilder.Entity<PaisME>().HasKey(p => p.PaisId);
             modelBuilder.Entity<DepartamentoME>().HasKey(p => p.DepartamentoId);

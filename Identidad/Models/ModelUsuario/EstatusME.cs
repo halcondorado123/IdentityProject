@@ -7,8 +7,8 @@ namespace Identidad.Models.ModelUsuario
     public class EstatusME
     {
         [Key]
-        public int? EstatusId { get; set; }
+        public int? EstatusId { get; set; } = 1;
         [Required]
-        public string? Estatus { get; set; }
+        public string? Estatus { get; set; } = "Activo";
     }
 }

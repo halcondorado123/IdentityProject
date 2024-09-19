@@ -51,6 +51,8 @@ namespace Identidad.Models.ModelUsuario
         [Phone]
         public string? TelefonoFijo { get; set; }
 
+        public EstadoCivilME? EstadoCivil { get; set; }
+
         // Nuevas propiedades
         [DataType(DataType.Date)]
         public DateTime? FechaCreacion { get; set; } = DateTime.Now; // Se establece la fecha de creación automáticamente

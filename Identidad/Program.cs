@@ -35,7 +35,7 @@ builder.Services.Configure<IdentityOptions>(options =>
 });
 
 builder.Services.AddTransient<AuditLogger>();
-
+//builder.Services.AddScoped<DropDownListHelper>();
 // Establecer la politica de password personalizada en clase PoliticaPassPersonalizada
 builder.Services.AddTransient<IPasswordValidator<AppUsuario>, PoliticaPassPersonalizada>();
 builder.Services.AddTransient<IUserValidator<AppUsuario>, PoliticaUsuarioEmailPersonalizada>();

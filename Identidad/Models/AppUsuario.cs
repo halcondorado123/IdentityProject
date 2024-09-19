@@ -21,6 +21,7 @@ namespace Identidad.Models
         public string? EmailPersonal { get; set; }
         public string? TelefonoCelular { get; set; }
         public string? TelefonoFijo { get; set; }
+        public EstadoCivilME? EstadoCivil { get; set; }
         public DateTime? FechaCreacion { get; set; }
         public DateTime? FechaActualizacion { get; set; }
 
